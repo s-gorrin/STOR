@@ -2,14 +2,14 @@ package clothing;
 
 import clothing.trait.Clean;
 
-import java.util.Date;
+import java.time.Instant;
 
 // An interface to define a trackable item
 public interface Trackable {
     int totalUses = 0;
     int usesSinceCleaned = 0;
-    Date added = new Date(0);
-    Date lastUsed = new Date(0);
+    Instant added = Instant.now();
+    Instant lastUsed = Instant.now();
     Clean cleanLevel = Clean.FRESH;
     int usesPerCleanLevel = 1;
 
@@ -20,6 +20,7 @@ public interface Trackable {
     // Accessors
     int getTotalUses();
     int getUsesSinceCleaned();
-    Date getAdded();
-    int getAge();
+    Instant getAdded();
+    long getAge();
+    Instant getLastUsed();
 }

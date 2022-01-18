@@ -2,7 +2,8 @@ package clothing;
 
 import clothing.trait.*;
 
-import java.util.Date;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 
 /*
     An abstract clothing class
@@ -19,12 +20,36 @@ public abstract class Clothing implements Sewable, Trackable {
     // Trackable interface
     private int totalUses;
     private int usesSinceCleaned;
-    private final Date added;
-    private Date lastUsed;
+    private final Instant added;
+    private Instant lastUsed;
     private Clean cleanLevel;
     private int usesPerCleanLevel;
 
-    private Fastener fastener;
+    // Constructors
+    public Clothing() {
+        // Default constructor. Sets the age and some initial values
+        added = Instant.now();
+
+        totalUses = 0;
+        usesSinceCleaned = 0;
+        cleanLevel = Clean.FRESH;
+        usesPerCleanLevel = 1;
+    }
+
+    public Clothing(Material material, Textile textile, Color color, Warmth warmth, int usesPerCleanLevel) {
+        // Constructor with traits and uses per clean passed in
+        added = Instant.now();
+
+        totalUses = 0;
+        usesSinceCleaned = 0;
+        cleanLevel = Clean.FRESH;
+        this.usesPerCleanLevel = usesPerCleanLevel;
+
+        this.material = material;
+        this.textile = textile;
+        this.color = color;
+        this.warmth = warmth;
+    }
 
     // Mutators
     public void setMaterial(Material material) {
@@ -51,6 +76,12 @@ public abstract class Clothing implements Sewable, Trackable {
             this.warmth = warmth;
     }
 
+    public void setUsesPerCleanLevel(int uses) {
+        // set a new usesPerCleanLevel only if one has not yet been set
+        if (usesPerCleanLevel == 1)
+            usesPerCleanLevel = uses;
+    }
+
     public void addUse() {
         // increment the use counters, update cleanLevel
         totalUses++;
@@ -65,7 +96,7 @@ public abstract class Clothing implements Sewable, Trackable {
                 cleanLevel = Clean.WASH;
         }
 
-        // TODO: set lastUsed to today
+        lastUsed = Instant.now(); // set to today
     }
 
     public void clean() {
@@ -112,6 +143,30 @@ public abstract class Clothing implements Sewable, Trackable {
 
     public Warmth getWarmth() {
         return warmth;
+    }
+
+    public int getTotalUses() {
+        return totalUses;
+    }
+
+    public int getUsesSinceCleaned() {
+        return usesSinceCleaned;
+    }
+
+    public Instant getAdded() {
+        return added;
+    }
+
+    public long getAge() {
+        // POST-CONDITION: the number of days since the item was added is returned
+        return added.until(Instant.now(), ChronoUnit.DAYS);
+    }
+
+    public Instant getLastUsed() {
+        // POST-CONDITION: the instant last used is returned. If it has never been used, null is returned
+        if (lastUsed != null)
+            return lastUsed;
+        return null;
     }
 
 }
