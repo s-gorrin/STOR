@@ -25,4 +25,3 @@ public interface Trackable {
     Date getAdded();
     int getAge();
 }
-
