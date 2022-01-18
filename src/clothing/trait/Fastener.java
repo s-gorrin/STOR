@@ -1,5 +1,6 @@
 package clothing.trait;
 
+// Possible clothing fastener types
 public enum Fastener {
     BUTTON,
     ZIPPER,

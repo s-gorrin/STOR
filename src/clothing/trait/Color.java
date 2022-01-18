@@ -1,5 +1,6 @@
 package clothing.trait;
 
+// Possible clothing colors
 public enum Color {
     BLACK,
     GRAY,

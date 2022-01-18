@@ -1,5 +1,6 @@
 package clothing.trait;
 
+// Possible clothing materials
 public enum Material {
     COTTON,
     LINEN,

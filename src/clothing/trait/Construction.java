@@ -1,5 +1,6 @@
 package clothing.trait;
 
+// Possible clothing fabric types
 public enum Construction {
     BASIC_WEAVE,
     TWILL,
