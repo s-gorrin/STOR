@@ -4,6 +4,7 @@ import clothing.trait.*;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.HashSet;
 
 /*
     An abstract clothing class
@@ -25,6 +26,8 @@ public abstract class Clothing implements Sewable, Trackable {
     private Clean cleanLevel;
     private int usesPerCleanLevel;
 
+    protected HashSet<Clothing> compatible; // clothes which can go with this one
+
     // Constructors
     public Clothing() {
         // Default constructor. Sets the age and some initial values
@@ -34,6 +37,8 @@ public abstract class Clothing implements Sewable, Trackable {
         usesSinceCleaned = 0;
         cleanLevel = Clean.FRESH;
         usesPerCleanLevel = 1;
+
+        compatible = new HashSet<>();
     }
 
     public Clothing(Material material, Textile textile, Color color, Warmth warmth, int usesPerCleanLevel) {
@@ -49,6 +54,8 @@ public abstract class Clothing implements Sewable, Trackable {
         this.textile = textile;
         this.color = color;
         this.warmth = warmth;
+
+        compatible = new HashSet<>();
     }
 
     // Mutators
@@ -105,10 +112,15 @@ public abstract class Clothing implements Sewable, Trackable {
         cleanLevel = Clean.FRESH;
     }
 
+    public void addCompatible(Clothing item) {
+        compatible.add(item);
+    }
+
 
     // Accessors
     public String getName() {
         // POST-CONDITION: a name, generated from traits, is returned
+        // example: green, loose_knit, cotton
         StringBuilder name = new StringBuilder();
         name.append(color.toString().toLowerCase());
 
@@ -167,6 +179,18 @@ public abstract class Clothing implements Sewable, Trackable {
         if (lastUsed != null)
             return lastUsed;
         return null;
+    }
+
+
+
+    public boolean possiblyCompatible(Clothing item) {
+        // POST-CONDITION: the possibility of a clothing item being compatible is returned
+        return true;
+    }
+
+    public boolean isCompatible(Clothing item) {
+        // POST-CONDITION a boolean indicating whether the item is compatible with this is returned
+        return compatible.contains(item);
     }
 
 }
