@@ -17,7 +17,7 @@ public class Top extends Clothing {
     }
 
     public Top(Length sleeves, Length length, Neckline neck, Function function) {
-        // constructor with passes in child class attributes but no parent attributes
+        // constructor with passed-in child class attributes but no parent attributes
         super();
 
         this.sleeves = sleeves;
@@ -26,10 +26,10 @@ public class Top extends Clothing {
         this.function = function;
     }
 
-    public Top(Material material, Textile textile, Color color, Warmth warmth, int usesPerCleanLevel,
-               Length sleeves, Length length, Neckline neck, Function function) {
-        // An all-variable constructor
-        super(material, textile, color, warmth, usesPerCleanLevel);
+    public Top(Material material, Textile textile, Color color, Warmth warmth, Fastener fastener,
+               int usesPerCleanLevel, Length sleeves, Length length, Neckline neck, Function function) {
+        // constructor with everything passed-in
+        super(material, textile, color, warmth, fastener, usesPerCleanLevel);
 
         this.sleeves = sleeves;
         this.length = length;
@@ -71,8 +71,7 @@ public class Top extends Clothing {
     public boolean possiblyCompatible(Clothing item) {
         // A preliminary checker of compatibility with other clothing items
         // POST-CONDITION: if the item could be compatible, true is returned. Otherwise, false
-        // an item is not compatible with its own type
-        if (item instanceof Top) // || item instanceof Dress
+        if (item instanceof Top || item instanceof Dress)
             return false;
 
         return Color.compatible(this.getColor(), item.getColor());
@@ -80,7 +79,9 @@ public class Top extends Clothing {
 
     public String getName() {
         // POST-CONDITION: a descriptive name is returned
-        // example: black, woven, silk top
-        return super.getName() + " top";
+        // example: black, woven, silk top with buttons
+        if (getColor() == null || getTextile() == null || getMaterial() == null)
+            return "a top" + getFastenerDescription();
+        return super.getName() + " top" + getFastenerDescription();
     }
 }

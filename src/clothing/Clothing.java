@@ -18,6 +18,8 @@ public abstract class Clothing implements Sewable, Trackable {
     private Color color;
     private Warmth warmth;
 
+    private Fastener fastener;
+
     // Trackable interface
     private int totalUses;
     private int usesSinceCleaned;
@@ -41,7 +43,8 @@ public abstract class Clothing implements Sewable, Trackable {
         compatible = new HashSet<>();
     }
 
-    public Clothing(Material material, Textile textile, Color color, Warmth warmth, int usesPerCleanLevel) {
+    public Clothing(Material material, Textile textile, Color color,
+                    Warmth warmth, Fastener fastener, int usesPerCleanLevel) {
         // Constructor with traits and uses per clean passed in
         added = Instant.now();
 
@@ -54,6 +57,7 @@ public abstract class Clothing implements Sewable, Trackable {
         this.textile = textile;
         this.color = color;
         this.warmth = warmth;
+        this.fastener = fastener;
 
         compatible = new HashSet<>();
     }
@@ -81,6 +85,11 @@ public abstract class Clothing implements Sewable, Trackable {
         // Set trait only if it does not already have one
         if (this.warmth == null)
             this.warmth = warmth;
+    }
+
+    public void setFastener(Fastener fastener) {
+        if (this.fastener == null)
+            this.fastener = fastener;
     }
 
     public void setUsesPerCleanLevel(int uses) {
@@ -121,6 +130,9 @@ public abstract class Clothing implements Sewable, Trackable {
     public String getName() {
         // POST-CONDITION: a name, generated from traits, is returned
         // example: green, loose_knit, cotton
+        if (color == null || textile == null || material == null)
+            return "clothing";
+
         StringBuilder name = new StringBuilder();
         name.append(color.toString().toLowerCase());
 
@@ -157,6 +169,10 @@ public abstract class Clothing implements Sewable, Trackable {
         return warmth;
     }
 
+    public Fastener getFastener() {
+        return fastener;
+    }
+
     public int getTotalUses() {
         return totalUses;
     }
@@ -181,6 +197,26 @@ public abstract class Clothing implements Sewable, Trackable {
         return null;
     }
 
+    public String getFastenerDescription() {
+        // POST-CONDITION: A descriptive phrase for each fastener is returned
+        if (fastener == null)
+            return "";
+
+        switch (fastener) {
+            case BUTTON:
+                return " with buttons";
+            case ZIPPER:
+                return " with a zipper";
+            case DRAWSTRING:
+                return " with a drawstring";
+            case SNAP:
+                return " with snaps";
+            case ELASTIC:
+                return " with elastic";
+            default:
+                return "";
+        }
+    }
 
 
     public boolean possiblyCompatible(Clothing item) {
