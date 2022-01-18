@@ -9,11 +9,13 @@ public interface Sewable {
     Color color = Color.OTHER;
     Warmth warmth = Warmth.NEUTRAL;
 
+    // Mutators
     void setMaterial(Material material);
     void setTextile(Textile textile);
     void setColor(Color color);
-    void setWarmth(Weather weather);
+    void setWarmth(Warmth warmth);
 
+    // Accessors
     Material getMaterial();
     Textile getTextile();
     Color getColor();

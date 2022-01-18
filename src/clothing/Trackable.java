@@ -13,13 +13,11 @@ public interface Trackable {
     Clean cleanLevel = Clean.FRESH;
     int usesPerCleanLevel = 1;
 
-    // Setters
+    // Mutators
     void addUse(); // increment the use counters, update cleanLevel
     void clean(); // reset the sinceCleaned counter, cleanLevel
-    void setAdded(Date added);
-    void setLastUsed(Date lastUsed);
 
-    // Getters
+    // Accessors
     int getTotalUses();
     int getUsesSinceCleaned();
     Date getAdded();
