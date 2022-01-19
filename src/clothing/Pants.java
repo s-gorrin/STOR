@@ -98,7 +98,10 @@ public class Pants extends Clothing {
         if (item instanceof Pants || item instanceof Dress)
             return false;
 
-        return Color.compatible(this.getColor(), item.getColor());
+        if (getColor() != null && item.getColor() != null)
+            return Color.compatible(this.getColor(), item.getColor());
+
+        return true;
     }
 
     public String getName() {

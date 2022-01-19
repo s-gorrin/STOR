@@ -6,5 +6,6 @@ public enum Textile {
     TWILL,
     LOOSE_KNIT,
     TIGHT_KNIT,
+    FELT,
     OTHER
 }

@@ -105,10 +105,13 @@ public class Dress extends Clothing {
     public boolean possiblyCompatible(Clothing item) {
         // A preliminary checker of compatibility with other clothing items
         // POST-CONDITION: if the item could be compatible, true is returned. Otherwise, false
-        if (item instanceof Dress || item instanceof Top || item instanceof Pants)
+        if (item instanceof Dress || item instanceof Top || item instanceof Pants || item instanceof Skirt)
             return false;
 
-        return Color.compatible(this.getColor(), item.getColor());
+        if (getColor() != null && item.getColor() != null)
+            return Color.compatible(this.getColor(), item.getColor());
+
+        return true;
     }
 
     @Override

@@ -100,7 +100,10 @@ public class Skirt extends Clothing {
         if (item instanceof Dress || item instanceof Skirt || item instanceof Pants)
             return false;
 
-        return Color.compatible(this.getColor(), item.getColor());
+        if (getColor() != null && item.getColor() != null)
+            return Color.compatible(this.getColor(), item.getColor());
+
+        return true;
     }
 
     @Override

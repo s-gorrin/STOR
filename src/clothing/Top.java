@@ -87,7 +87,10 @@ public class Top extends Clothing {
         if (item instanceof Top || item instanceof Dress)
             return false;
 
-        return Color.compatible(this.getColor(), item.getColor());
+        if (getColor() != null && item.getColor() != null)
+            return Color.compatible(this.getColor(), item.getColor());
+
+        return true;
     }
 
     @Override
