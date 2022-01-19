@@ -3,6 +3,7 @@ package clothing;
 import clothing.trait.Type;
 
 import java.util.HashMap;
+import java.util.Vector;
 
 public class Closet {
     // A container class for clothing items

@@ -5,6 +5,7 @@ import clothing.trait.*;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.HashSet;
+import java.util.Objects;
 
 /*
     An abstract clothing class
@@ -22,6 +23,7 @@ public abstract class Clothing implements Sewable, Trackable {
     private Warmth warmth;
 
     private Fastener fastener;
+    private String detail = "";
 
     // Trackable interface
     private int totalUses;
@@ -93,6 +95,10 @@ public abstract class Clothing implements Sewable, Trackable {
     public void setFastener(Fastener fastener) {
         if (this.fastener == null)
             this.fastener = fastener;
+    }
+
+    public void setDetail(String detail) {
+        this.detail = detail;
     }
 
     public void setUsesPerCleanLevel(int uses) {
@@ -176,6 +182,10 @@ public abstract class Clothing implements Sewable, Trackable {
         return fastener;
     }
 
+    public String getDetail() {
+        return detail;
+    }
+
     public int getTotalUses() {
         return totalUses;
     }
@@ -224,7 +234,7 @@ public abstract class Clothing implements Sewable, Trackable {
 
     public boolean possiblyCompatible(Clothing item) {
         // POST-CONDITION: the possibility of a clothing item being compatible is returned
-        return true;
+        return Color.compatible(this.color, item.getColor());
     }
 
     public boolean isCompatible(Clothing item) {

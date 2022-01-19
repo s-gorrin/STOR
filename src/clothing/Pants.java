@@ -2,6 +2,8 @@ package clothing;
 
 import clothing.trait.*;
 
+import java.util.Objects;
+
 public class Pants extends Clothing {
     // A class to define an article of clothing which covers legs individually
 
@@ -12,7 +14,6 @@ public class Pants extends Clothing {
     private boolean pockets;
     private boolean beltLoops;
     private Function function;
-    private Fastener fastener;
 
     // Constructors
     public Pants() {
@@ -90,6 +91,7 @@ public class Pants extends Clothing {
         return function;
     }
 
+    @Override
     public boolean possiblyCompatible(Clothing item) {
         // A preliminary checker of compatibility with other clothing items
         // POST-CONDITION: if the item could be compatible, true is returned. Otherwise, false
@@ -111,6 +113,9 @@ public class Pants extends Clothing {
 
         if (getColor() == null || getTextile() == null || getMaterial() == null)
             return base + getFastenerDescription();
+
+        if (!Objects.equals(super.getDetail(), ""))
+            return super.getName() + " " + base + getFastenerDescription() + " with " + super.getDetail();
 
         return super.getName() + " " + base + getFastenerDescription();
     }

@@ -2,6 +2,8 @@ package clothing;
 
 import clothing.trait.*;
 
+import java.util.Objects;
+
 public class Dress extends Clothing {
     // A class to define an article of clothing that covers the whole body
 
@@ -99,6 +101,7 @@ public class Dress extends Clothing {
         return function;
     }
 
+    @Override
     public boolean possiblyCompatible(Clothing item) {
         // A preliminary checker of compatibility with other clothing items
         // POST-CONDITION: if the item could be compatible, true is returned. Otherwise, false
@@ -108,6 +111,7 @@ public class Dress extends Clothing {
         return Color.compatible(this.getColor(), item.getColor());
     }
 
+    @Override
     public String getName() {
         // POST-CONDITION: a descriptive name is returned
         // example: yellow, woven, cotton long dress with a drawstring
@@ -120,6 +124,9 @@ public class Dress extends Clothing {
 
         if (getColor() == null || getTextile() == null || getMaterial() == null)
             return base + getFastenerDescription();
+
+        if (!Objects.equals(super.getDetail(), ""))
+            return super.getName() + " " + base + getFastenerDescription() + " with " + super.getDetail();
 
         return super.getName() + " " + base + getFastenerDescription();
     }

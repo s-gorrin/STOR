@@ -10,58 +10,34 @@ public enum Color {
     ORANGE,
     YELLOW,
     GREEN,
-    EMERALD,
     BLUE,
-    NAVY,
     PURPLE,
-    GREEN_PLAID,
-    BLUE_PLAID,
-    RED_PLAID,
     PATTERN,
     OTHER;
 
-    // TODO: work with Sage to finish this
     public static boolean compatible(Color self, Color other) {
         // A static function to determine if two clothing colors are compatible
         // POST-CONDITION: true or false is returned, indicating compatible colors or not
-        if (self == other)
-            return true;
 
         switch (self) {
-            case BLACK:
-                return other != Color.BROWN;
             case GRAY:
-                return other != Color.PATTERN;
+                return other != BROWN && other != ORANGE && other != YELLOW;
             case WHITE:
-                return true;
+                return other != GRAY;
             case BROWN:
-                return true;
+                return other != GRAY && other != ORANGE && other != YELLOW && other != PURPLE;
             case RED:
-                return other != Color.GREEN && other != Color.EMERALD;
+                return other != GREEN && other != YELLOW && other != PURPLE;
             case ORANGE:
-                return other == Color.BLACK || other == Color.WHITE ||
-                        other == Color.YELLOW || other == Color.RED ||
-                        other == Color.BROWN || other == Color.RED_PLAID;
+                return other != BROWN && other != GREEN && other != BLUE && other != PURPLE;
             case YELLOW:
-                return true;
+                return other != BROWN && other != RED && other != YELLOW && other != PURPLE;
             case GREEN:
-                return other != Color.PURPLE && other != Color.RED && other != Color.RED_PLAID;
-            case EMERALD:
-                return other != Color.PURPLE;
+                return other != RED && other != ORANGE && other != PURPLE;
             case BLUE:
-                return other != Color.ORANGE;
-            case NAVY:
-                return other != Color.ORANGE;
+                return other != ORANGE;
             case PURPLE:
-                return other != Color.GREEN && other != Color.ORANGE && other != Color.GREEN_PLAID;
-            case GREEN_PLAID:
-                return other != Color.ORANGE;
-            case BLUE_PLAID:
-                return other != Color.ORANGE;
-            case RED_PLAID:
-                return true;
-            case PATTERN:
-                return true;
+                return other == BLACK || other == WHITE || other == BLUE;
             default:
                 return true;
         }

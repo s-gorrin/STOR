@@ -2,11 +2,13 @@ package clothing;
 
 import clothing.trait.*;
 
+import java.util.Objects;
+
 public class Top extends Clothing {
     // A class to define an article of clothing that covers the top half of the body
 
     public static final Type type = Type.TOP;
-    
+
     private Length sleeves;
     private Length length;
     private Neckline neck;
@@ -56,6 +58,10 @@ public class Top extends Clothing {
             this.neck = neck;
     }
 
+    public void setFunction(Function function) {
+        if (this.function == null)
+            this.function = function;
+    }
 
     // Accessors
     public Length getSleeves() {
@@ -70,6 +76,11 @@ public class Top extends Clothing {
         return neck;
     }
 
+    public Function getFunction() {
+        return function;
+    }
+
+    @Override
     public boolean possiblyCompatible(Clothing item) {
         // A preliminary checker of compatibility with other clothing items
         // POST-CONDITION: if the item could be compatible, true is returned. Otherwise, false
@@ -79,11 +90,16 @@ public class Top extends Clothing {
         return Color.compatible(this.getColor(), item.getColor());
     }
 
+    @Override
     public String getName() {
         // POST-CONDITION: a descriptive name is returned
         // example: black, woven, silk top with buttons
         if (getColor() == null || getTextile() == null || getMaterial() == null)
             return "a top" + getFastenerDescription();
+
+        if (!Objects.equals(super.getDetail(), ""))
+            return super.getName() + " top" + getFastenerDescription() + " with " + super.getDetail();
+
         return super.getName() + " top" + getFastenerDescription();
     }
 }
