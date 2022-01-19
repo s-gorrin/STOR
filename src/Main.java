@@ -1,10 +1,41 @@
+import clothing.*;
+import clothing.trait.*;
+
 import java.time.Instant;
+import java.util.HashMap;
+import java.util.HashSet;
 
 public class Main {
 
     public static void main(String[] args) {
-        Instant inst = Instant.now();
+        HashMap<Integer, Clothing> closet = new HashMap<>();
 
-        System.out.println(inst);
+        //System.out.println(Instant.now());
+
+        int nextID = 1;
+
+        closet.put(nextID++, new Dress(Length.NONE, Length.MEDIUM, Volume.LOOSE,
+                Neckline.BOAT, false, Function.FORMAL));
+        closet.put(nextID++, new Top());
+        closet.put(nextID++, new Top(Length.LONG, Length.LONG, Neckline.CREW, Function.CASUAL));
+        closet.put(nextID, new Pants());
+
+        closet.get(4).setColor(Color.BLACK);
+        closet.get(3).setColor(Color.ORANGE);
+        closet.get(3).setTextile(Textile.TIGHT_KNIT);
+        closet.get(2).setColor(Color.GRAY);
+
+        // Just adding some values. Closet will eventually be a class with methods
+        for (Clothing item : closet.values()) {
+            item.setColor(Color.BLACK);
+            item.setMaterial(Material.COTTON);
+            item.setFastener(Fastener.NONE);
+            item.setTextile(Textile.BASIC_WEAVE);
+            item.setWarmth(Warmth.NEUTRAL);
+            item.setUsesPerCleanLevel(1);
+            System.out.println(item.getName());
+
+        }
+
     }
 }

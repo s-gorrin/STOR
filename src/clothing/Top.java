@@ -5,6 +5,8 @@ import clothing.trait.*;
 public class Top extends Clothing {
     // A class to define an article of clothing that covers the top half of the body
 
+    public static final Type type = Type.TOP;
+    
     private Length sleeves;
     private Length length;
     private Neckline neck;

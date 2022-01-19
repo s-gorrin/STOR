@@ -5,6 +5,8 @@ import clothing.trait.*;
 public class Dress extends Clothing {
     // A class to define an article of clothing that covers the whole body
 
+    public static final Type type = Type.DRESS;
+
     private Length sleeves;
     private Length length;
     private Volume volume;

@@ -12,6 +12,9 @@ import java.util.HashSet;
     and Trackable for most of its usage tracking.
  */
 public abstract class Clothing implements Sewable, Trackable {
+
+    public Type type = Type.CLOTHING;
+
     // Sewable interface
     private Material material;
     private Textile textile;

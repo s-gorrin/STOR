@@ -5,6 +5,8 @@ import clothing.trait.*;
 public class Pants extends Clothing {
     // A class to define an article of clothing which covers legs individually
 
+    public static final Type type = Type.PANTS;
+
     private Length length;
     private Length waist;
     private boolean pockets;
