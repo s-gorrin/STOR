@@ -5,12 +5,11 @@ import clothing.trait.*;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.HashSet;
-import java.util.Objects;
 
-/*
-    An abstract clothing class
-    It implements Sewable for most of its descriptive aspects,
-    and Trackable for most of its usage tracking.
+/**
+ * An abstract clothing class
+ * It implements Sewable for most of its descriptive aspects,
+ * and Trackable for most of its usage tracking.
  */
 public abstract class Clothing implements Sewable, Trackable {
 
@@ -33,6 +32,8 @@ public abstract class Clothing implements Sewable, Trackable {
     private Clean cleanLevel;
     private int usesPerCleanLevel;
 
+    private int ID = -1; // the index of the item in the Closet vector
+    // this functionality is getting moved to Closet
     protected HashSet<Clothing> compatible; // clothes which can go with this one
 
     // Constructors
@@ -105,6 +106,11 @@ public abstract class Clothing implements Sewable, Trackable {
         // set a new usesPerCleanLevel only if one has not yet been set
         if (usesPerCleanLevel == 1)
             usesPerCleanLevel = uses;
+    }
+
+    public void setID(int ID) {
+        if (ID == -1)
+            this.ID = ID;
     }
 
     public void addUse() {
@@ -203,11 +209,16 @@ public abstract class Clothing implements Sewable, Trackable {
         return added.until(Instant.now(), ChronoUnit.DAYS);
     }
 
+    /** @return the last Instant the Clothing was used, or null */
     public Instant getLastUsed() {
-        // POST-CONDITION: the instant last used is returned. If it has never been used, null is returned
         if (lastUsed != null)
             return lastUsed;
         return null;
+    }
+
+    /** @return the index of the Clothing or -1 if it has not yet been assigned */
+    public int getID() {
+        return ID;
     }
 
     public String getFastenerDescription() {
@@ -230,7 +241,6 @@ public abstract class Clothing implements Sewable, Trackable {
                 return "";
         }
     }
-
 
     public boolean possiblyCompatible(Clothing item) {
         // POST-CONDITION: the possibility of a clothing item being compatible is returned

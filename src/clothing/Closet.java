@@ -3,51 +3,98 @@ package clothing;
 import clothing.trait.Type;
 
 import java.util.HashMap;
+import java.util.Set;
 import java.util.Vector;
 
+/**
+ * A container class for clothing items to handle
+ */
 public class Closet {
-    // A container class for clothing items
-
+    // This is a HashMap because the ID is used in several places,
+    // which means the ID cannot be an index, or removals would be very complicated
     private final HashMap<Integer, Clothing> closet;
-    private int ID;
+    private int nextID;
 
+    /**
+     * Class constructor
+     */
     public Closet() {
         closet = new HashMap<>();
-        ID = 0;
+        nextID = 0;
     }
 
     // Mutators
+    /**
+     * Add an item to the closet and set its ID attribute
+     * POST_CONDITION: The index of the added item in the Vector is returned
+     * @param item  the Clothing to be added
+     * @return      the ID of the clothing that was added
+     */
     public int add(Clothing item) {
-        // Add an item to the closet and an ID is assigned to it
-        // POST_CONDITION: The ID of the added item is returned
-        closet.put(++ID, item);
-        return ID;
+        item.setID(nextID);
+        closet.put(nextID, item);
+
+        return nextID++;
+    }
+
+    /**
+     * POST-CONDITION: the Clothing corresponding to the ID is removed from closet and returned
+     * @param ID    the ID of the item to be removed
+     * @return      the Clothing that was removed
+     */
+    public Clothing remove(int ID) {
+        return closet.remove(ID);
     }
 
     // Accessors
+
+    /**
+     * POST-CONDITION: The item corresponding with the given ID is returned
+     * @param ID    the ID of the item to access
+     * @return      the item corresponding with the given ID or null if it is absent
+     */
     public Clothing get(int ID) {
-        // POST-CONDITION: The item corresponding with the given ID is returned
-        if (ID > 0 && ID <= this.ID)
-            return closet.get(ID);
-        return null;
+        return closet.get(ID);
     }
 
-    public int getLatestID() {
-        // POST-CONDITION: The most recently added ID is returned, or 0 if there are no clothes
-        // This can be used to loop through the closet with a for loop as in:
-        //      for (int i = 1; i <= closet.getLatestID(); i++) {}
-        return ID;
+    /**
+     * POST-CONDITION: whether the key is in the closet is returned
+     * @param ID    the item being checked
+     * @return      true if the item is present, false if not
+     */
+    public boolean contains(int ID) {
+        return closet.containsKey(ID);
     }
 
+    /**
+     * POST-CONDITION: The number of items in the closet is returned
+     * @return the size of the closet
+     */
+    public int size() {
+        return closet.size();
+    }
+
+    /**
+     * POST-CONDITION: the number of items of the specified type is returned
+     * @param type  the type of Clothing being counted
+     * @return      the number of Clothing of that type in the closet
+     */
     public int getNumberOf(Type type) {
-        // POST-CONDITION: the number of items of the specified type is returned
         int count = 0;
 
-        for (int i = 1; i <= ID; i++) {
-            if (closet.get(i).type == type)
+        for (Clothing clothing : closet.values()) {
+            if (clothing.type == type)
                 count++;
         }
 
         return count;
+    }
+
+    /**
+     * POST-CONDITION: a Set of all items in the closet is returned
+     * @return  the set of all items
+     */
+    public Set<Integer> getAll() {
+        return closet.keySet();
     }
 }

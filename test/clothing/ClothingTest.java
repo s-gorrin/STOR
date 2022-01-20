@@ -82,6 +82,6 @@ public class ClothingTest {
         top.setColor(Color.GRAY);
 
         // Then
-        Assert.assertTrue(((Clothing)pants).possiblyCompatible(top)); // down-casting to be sure to get super
+        Assert.assertTrue(((Clothing)pants).possiblyCompatible(top)); // down-casting to get parent version
     }
 }

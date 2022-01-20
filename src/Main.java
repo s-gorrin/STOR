@@ -33,8 +33,8 @@ public class Main {
             item.setTextile(Textile.BASIC_WEAVE);
             item.setWarmth(Warmth.NEUTRAL);
             item.setUsesPerCleanLevel(1);
-            System.out.println(item.getName());
 
+            System.out.println(item.getName()); // print descriptions
         }
 
     }
