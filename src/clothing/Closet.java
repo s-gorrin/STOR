@@ -4,7 +4,6 @@ import clothing.trait.Type;
 
 import java.util.HashMap;
 import java.util.Set;
-import java.util.Vector;
 
 /**
  * A container class for clothing items to handle
@@ -83,7 +82,7 @@ public class Closet {
         int count = 0;
 
         for (Clothing clothing : closet.values()) {
-            if (clothing.type == type)
+            if (clothing.getType() == type)
                 count++;
         }
 

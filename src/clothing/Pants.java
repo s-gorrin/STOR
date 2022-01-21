@@ -71,6 +71,10 @@ public class Pants extends Clothing {
 
 
     // Accessors
+    public Type getType() {
+        return Type.PANTS;
+    }
+
     public Length getLength() {
         return length;
     }
@@ -104,22 +108,14 @@ public class Pants extends Clothing {
         return true;
     }
 
-    public String getName() {
+    public String getName() throws NullPointerException {
         // POST-CONDITION: a descriptive name is returned
         // example: black, woven, cotton long pants with a zipper
-        String base;
+        String base = length.toString().toLowerCase() + " pants";
 
-        if (length != null)
-            base = length.toString().toLowerCase() + " pants";
-        else
-            base = "pants";
+        if (!Objects.equals(getDetail(), ""))
+            return getName(base) + " with " + getDetail();
 
-        if (getColor() == null || getTextile() == null || getMaterial() == null)
-            return base + getFastenerDescription();
-
-        if (!Objects.equals(super.getDetail(), ""))
-            return super.getName() + " " + base + getFastenerDescription() + " with " + super.getDetail();
-
-        return super.getName() + " " + base + getFastenerDescription();
+        return getName(base);
     }
 }

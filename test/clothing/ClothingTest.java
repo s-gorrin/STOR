@@ -65,8 +65,8 @@ public class ClothingTest {
         pants.setFastener(Fastener.ZIPPER);
 
         // Then
-        Assert.assertEquals(pants.getFastenerDescription(), " with a zipper");
-        Assert.assertEquals(top.getFastenerDescription(), "");
+        Assert.assertEquals(Fastener.getDescription(pants.getFastener()), " with a zipper");
+        Assert.assertEquals(Fastener.getDescription(top.getFastener()), "");
     }
 
     @Test

@@ -4,10 +4,10 @@ import clothing.trait.*;
 
 import java.util.Objects;
 
+/**
+ * A class to define an article of clothing that covers the top half of the body
+ */
 public class Top extends Clothing {
-    // A class to define an article of clothing that covers the top half of the body
-
-    public static final Type type = Type.TOP;
 
     private Length sleeves;
     private Length length;
@@ -64,6 +64,11 @@ public class Top extends Clothing {
     }
 
     // Accessors
+
+    public Type getType() {
+        return Type.TOP;
+    }
+
     public Length getSleeves() {
         return sleeves;
     }
@@ -93,16 +98,13 @@ public class Top extends Clothing {
         return true;
     }
 
-    @Override
-    public String getName() {
+    public String getName() throws NullPointerException {
         // POST-CONDITION: a descriptive name is returned
         // example: black, woven, silk top with buttons
-        if (getColor() == null || getTextile() == null || getMaterial() == null)
-            return "a top" + getFastenerDescription();
 
-        if (!Objects.equals(super.getDetail(), ""))
-            return super.getName() + " top" + getFastenerDescription() + " with " + super.getDetail();
+        if (!Objects.equals(getDetail(), ""))
+            return getName(" top") + " with " + getDetail();
 
-        return super.getName() + " top" + getFastenerDescription();
+        return getName(" top");
     }
 }

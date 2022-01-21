@@ -4,10 +4,10 @@ import clothing.trait.*;
 
 import java.util.Objects;
 
+/**
+ * A class to define an article of clothing which covers both legs together
+ */
 public class Skirt extends Clothing {
-    // A class to define an article of clothing which covers both legs together
-
-    public static final Type type = Type.SKIRT;
 
     private Length length;
     private Length waist;
@@ -72,6 +72,9 @@ public class Skirt extends Clothing {
 
 
     // Accessors
+    public Type getType() {
+        return Type.SKIRT;
+    }
 
     public Length getLength() {
         return length;
@@ -106,23 +109,14 @@ public class Skirt extends Clothing {
         return true;
     }
 
-    @Override
-    public String getName() {
+    public String getName() throws NullPointerException {
         // POST-CONDITION: a descriptive name is returned
         // example: yellow, woven, cotton long dress with a drawstring
-        String base;
+        String base = length.toString().toLowerCase() + " skirt";
 
-        if (length != null)
-            base = length.toString().toLowerCase() + " skirt";
-        else
-            base = "skirt";
+        if (!Objects.equals(getDetail(), ""))
+            return getName(base) + " with " + getDetail();
 
-        if (getColor() == null || getTextile() == null || getMaterial() == null)
-            return base + getFastenerDescription();
-
-        if (!Objects.equals(super.getDetail(), ""))
-            return super.getName() + " " + base + getFastenerDescription() + " with " + super.getDetail();
-
-        return super.getName() + " " + base + getFastenerDescription();
+        return getName(base);
     }
 }

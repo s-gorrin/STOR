@@ -13,8 +13,6 @@ import java.util.HashSet;
  */
 public abstract class Clothing implements Sewable, Trackable {
 
-    public Type type = Type.CLOTHING;
-
     // Sewable interface
     private Material material;
     private Textile textile;
@@ -142,11 +140,11 @@ public abstract class Clothing implements Sewable, Trackable {
 
 
     // Accessors
-    public String getName() {
+    public abstract Type getType();
+
+    public String getName(String childName) throws NullPointerException {
         // POST-CONDITION: a name, generated from traits, is returned
         // example: green, loose_knit, cotton
-        if (color == null || textile == null || material == null)
-            return "clothing";
 
         StringBuilder name = new StringBuilder();
         name.append(color.toString().toLowerCase());
@@ -165,7 +163,7 @@ public abstract class Clothing implements Sewable, Trackable {
             name.append(material.toString().toLowerCase());
         }
 
-        return name.toString();
+        return name + " " + childName + Fastener.getDescription(fastener);
     }
 
     public Material getMaterial() {
@@ -211,9 +209,7 @@ public abstract class Clothing implements Sewable, Trackable {
 
     /** @return the last Instant the Clothing was used, or null */
     public Instant getLastUsed() {
-        if (lastUsed != null)
-            return lastUsed;
-        return null;
+        return lastUsed;
     }
 
     /** @return the index of the Clothing or -1 if it has not yet been assigned */
@@ -221,26 +217,7 @@ public abstract class Clothing implements Sewable, Trackable {
         return ID;
     }
 
-    public String getFastenerDescription() {
-        // POST-CONDITION: A descriptive phrase for each fastener is returned
-        if (fastener == null)
-            return "";
 
-        switch (fastener) {
-            case BUTTON:
-                return " with buttons";
-            case ZIPPER:
-                return " with a zipper";
-            case DRAWSTRING:
-                return " with a drawstring";
-            case SNAP:
-                return " with snaps";
-            case ELASTIC:
-                return " with elastic";
-            default:
-                return "";
-        }
-    }
 
     public boolean possiblyCompatible(Clothing item) {
         // POST-CONDITION: the possibility of a clothing item being compatible is returned
