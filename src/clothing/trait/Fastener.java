@@ -10,8 +10,12 @@ public enum Fastener {
     OTHER,
     NONE;
 
+    /**
+     * A descriptive phrase for each fastener type
+     * @param fastener  the fastener to be described
+     * @return          the descriptive phrase
+     */
     public static String getDescription(Fastener fastener) {
-        // POST-CONDITION: A descriptive phrase for each fastener is returned
         if (fastener == null)
             return "";
 
