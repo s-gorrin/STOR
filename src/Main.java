@@ -7,45 +7,45 @@ import java.util.HashSet;
 
 public class Main {
 
+    /**
+     * Currently an example class showing adding different Clothing types to the Closet
+     * @param args none
+     */
     public static void main(String[] args) {
-        HashMap<Integer, Clothing> closet = new HashMap<>();
+        Closet closet = new Closet();
 
-        //System.out.println(Instant.now());
+        for (int i = 0; i < 5; i++)
+            closet.add(new Top());
 
-        int nextID = 1;
+        for (int i = 0; i < 4; i++)
+            closet.add(new Dress());
 
-        closet.put(nextID++, new Dress(Length.NONE, Length.MEDIUM, Volume.LOOSE,
-                Neckline.BOAT, false, Function.FORMAL));
-        closet.put(nextID++, new Top());
-        closet.put(nextID++, new Top(Length.LONG, Length.LONG, Neckline.CREW, Function.CASUAL));
-        closet.put(nextID, new Pants());
+        for (int i = 0; i < 3; i++)
+            closet.add(new Pants());
 
-        closet.get(4).setColor(Color.BLACK);
-        closet.get(3).setColor(Color.ORANGE);
-        closet.get(3).setTextile(Textile.TIGHT_KNIT);
-        closet.get(2).setColor(Color.GRAY);
+        for (int i = 0; i < 2; i++)
+            closet.add(new Skirt());
 
-        try {
-            System.out.println(closet.get(2).getName());
-        }
-        catch (NullPointerException e) {
-            System.out.printf("the %s is missing some data%n", closet.get(2).getType());
-        }
+        for (int ID : closet.getAll()) {
 
-        // Just adding some values. Closet will eventually be a class with methods
-        for (Clothing item : closet.values()) {
-            item.setColor(Color.BLACK);
-            item.setMaterial(Material.COTTON);
-            item.setFastener(Fastener.NONE);
-            item.setTextile(Textile.BASIC_WEAVE);
-            item.setWarmth(Warmth.NEUTRAL);
-            item.setUsesPerCleanLevel(1);
+            closet.get(ID).setColor(Color.BLACK);
+            closet.get(ID).setTextile(Textile.BASIC_WEAVE);
+            closet.get(ID).setMaterial(Material.COTTON);
+
+            if (closet.get(ID).getType().equals(Type.DRESS))
+                ((Dress)closet.get(ID)).setLength(Length.LONG);
+
+            if (closet.get(ID).getType().equals(Type.PANTS))
+                ((Pants)closet.get(ID)).setLength(Length.MEDIUM);
+
+            if (closet.get(ID).getType().equals(Type.SKIRT))
+                ((Skirt)closet.get(ID)).setLength(Length.SHORT);
 
             try {
-                System.out.println(item.getName()); // print descriptions
+                System.out.println(closet.get(ID).getName());
             }
             catch (NullPointerException e) {
-                System.out.printf("%s, ID: %d: missing data%n", item.getType(), item.getID());
+                System.out.println(e + ": A class is missing some critical data.");
             }
         }
 

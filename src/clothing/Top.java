@@ -103,8 +103,8 @@ public class Top extends Clothing {
         // example: black, woven, silk top with buttons
 
         if (!Objects.equals(getDetail(), ""))
-            return getName(" top") + " with " + getDetail();
+            return getName("top") + " with " + getDetail();
 
-        return getName(" top");
+        return getName("top");
     }
 }
