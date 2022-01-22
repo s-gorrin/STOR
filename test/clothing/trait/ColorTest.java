@@ -23,4 +23,10 @@ public class ColorTest {
         Assert.assertTrue(Color.compatible(black, purple)); // weird true
         Assert.assertTrue(Color.compatible(black, green)); // regular true
     }
+
+    @Test (expected = ArrayIndexOutOfBoundsException.class)
+    public void get() {
+        Assert.assertEquals(Color.get(1), Color.BLACK);
+        Color test = Color.get(56);
+    }
 }
