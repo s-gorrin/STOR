@@ -4,7 +4,6 @@ import clothing.trait.*;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
-import java.util.HashSet;
 
 /**
  * An abstract clothing class
@@ -30,26 +29,33 @@ public abstract class Clothing implements Sewable, Trackable {
     private Clean cleanLevel;
     private int usesPerCleanLevel;
 
-    private int ID = -1; // the index of the item in the Closet vector
-    // this functionality is getting moved to Closet
-    protected HashSet<Clothing> compatible; // clothes which can go with this one
+    private int ID = -1; // the ID of the item in the Closet
 
     // Constructors
+
+    /**
+     * Constructor with no traits passed in
+     */
     public Clothing() {
-        // Default constructor. Sets the age and some initial values
         added = Instant.now();
 
         totalUses = 0;
         usesSinceCleaned = 0;
         cleanLevel = Clean.FRESH;
         usesPerCleanLevel = 1;
-
-        compatible = new HashSet<>();
     }
 
+    /**
+     * Constructor with all user-defined traits passed in
+     * @param material              What material it is made of
+     * @param textile               How it is constructed
+     * @param color                 What the primary color is
+     * @param warmth                How warm it is to wear
+     * @param fastener              How it is fastened
+     * @param usesPerCleanLevel     How many uses before it changes cleanliness ratingl
+     */
     public Clothing(Material material, Textile textile, Color color,
                     Warmth warmth, Fastener fastener, int usesPerCleanLevel) {
-        // Constructor with traits and uses per clean passed in
         added = Instant.now();
 
         totalUses = 0;
@@ -62,8 +68,45 @@ public abstract class Clothing implements Sewable, Trackable {
         this.color = color;
         this.warmth = warmth;
         this.fastener = fastener;
+    }
 
-        compatible = new HashSet<>();
+    /**
+     * A constructor for every parameter, including those that are normally set automatically,
+     *      to recreate the item from a file.
+     * @param added                 Instant of first add
+     * @param totalUses             Number of times it has been used
+     * @param usesSinceCleaned      Number of times it has been used since cleaning
+     * @param cleanLevel            Current level of cleanliness
+     * @param lastUsed              Instant of most recent use
+     * @param material              What material it is made of
+     * @param textile               How it is constructed
+     * @param color                 What the primary color is
+     * @param warmth                How warm it is to wear
+     * @param fastener              How it is fastened
+     * @param usesPerCleanLevel     How many uses before it changes cleanliness rating
+     * @param detail                A descriptive detail about it
+     * @param ID                    Reference number for it in the Closet
+     */
+    public Clothing(Instant added, int totalUses, int usesSinceCleaned, Clean cleanLevel,
+                    Instant lastUsed, Material material, Textile textile, Color color,
+                    Warmth warmth, Fastener fastener, int usesPerCleanLevel, String detail, int ID) {
+        this.added = added;
+
+        this.totalUses = totalUses;
+        this.usesSinceCleaned = usesSinceCleaned;
+        this.cleanLevel = cleanLevel;
+        this.usesPerCleanLevel = usesPerCleanLevel;
+
+        this.lastUsed = lastUsed;
+
+        this.material = material;
+        this.textile = textile;
+        this.color = color;
+        this.warmth = warmth;
+        this.fastener = fastener;
+
+        this.detail = detail;
+        this.ID = ID;
     }
 
     // Mutators
@@ -133,11 +176,6 @@ public abstract class Clothing implements Sewable, Trackable {
         usesSinceCleaned = 0;
         cleanLevel = Clean.FRESH;
     }
-
-    public void addCompatible(Clothing item) {
-        compatible.add(item);
-    }
-
 
     // Accessors
     public abstract Type getType();
@@ -217,16 +255,16 @@ public abstract class Clothing implements Sewable, Trackable {
         return ID;
     }
 
+    public int getUsesPerCleanLevel() {
+        return usesPerCleanLevel;
+    }
 
+    public Clean getCleanLevel() {
+        return cleanLevel;
+    }
 
     public boolean possiblyCompatible(Clothing item) {
         // POST-CONDITION: the possibility of a clothing item being compatible is returned
         return Color.compatible(this.color, item.getColor());
     }
-
-    public boolean isCompatible(Clothing item) {
-        // POST-CONDITION a boolean indicating whether the item is compatible with this is returned
-        return compatible.contains(item);
-    }
-
 }
