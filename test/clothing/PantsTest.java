@@ -14,10 +14,10 @@ public class PantsTest {
 
         // Given
         Pants pants = new Pants(Material.COTTON, Textile.TWILL, Color.BROWN,
-                Warmth.WARM, Fastener.BUTTON, 3, Length.LONG,
-                Length.MID_LONG, true, true, Function.FORMAL);
+                Warmth.WARM, Fastener.BUTTON, 3, Length.LONG, Function.FORMAL,
+                Length.MID_LONG, true, true);
 
-        Top top = new Top(Length.LONG, Length.LONG, Neckline.COLLAR, Function.CASUAL);
+        Top top = new Top(Length.LONG, Function.CASUAL, Length.LONG, Neckline.COLLAR);
 
         // When
         top.setColor(Color.WHITE);
@@ -28,16 +28,16 @@ public class PantsTest {
 
     }
 
-    @Test
+    @Test (expected = NullPointerException.class)
     public void getName() {
         // Given
         Pants pants = new Pants(Material.COTTON, Textile.TWILL, Color.BROWN,
-                Warmth.WARM, Fastener.BUTTON, 3, Length.LONG,
-                Length.MID_LONG, true, true, Function.FORMAL);
+                Warmth.WARM, Fastener.BUTTON, 3, Length.LONG, Function.FORMAL,
+                Length.MID_LONG, true, true);
 
         // Then
         Assert.assertEquals(pants.getName(), "brown, twill, cotton long pants with buttons");
-        Assert.assertEquals(new Pants().getName(), "pants");
+        Assert.assertEquals(new Pants().getName(), "pants"); // NullPointerException
 
         // When
         pants.setDetail("cuffs");

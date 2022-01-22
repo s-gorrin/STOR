@@ -9,12 +9,12 @@ import java.util.Objects;
  */
 public class Dress extends Clothing {
 
-    private Length sleeves;
     private Length length;
-    private Volume volume;
-    private Neckline neck;
-    private boolean pockets;
     private Function function;
+    private Length sleeves;
+    private Neckline neck;
+    private Volume volume;
+    private boolean pockets;
 
     // Constructors
 
@@ -23,31 +23,30 @@ public class Dress extends Clothing {
         super();
     }
 
-    public Dress(Length sleeves, Length length, Volume volume, Neckline neck, boolean pockets, Function function) {
+    public Dress(Length length, Function function, Length sleeves, Neckline neck, Volume volume, boolean pockets) {
         // constructor with passed-in child class attributes but no parent attributes
         super();
 
-        this.sleeves = sleeves;
         this.length = length;
-        this.volume = volume;
-        this.neck = neck;
-        this.pockets = pockets;
         this.function = function;
+        this.sleeves = sleeves;
+        this.neck = neck;
+        this.volume = volume;
+        this.pockets = pockets;
     }
 
     public Dress(Material material, Textile textile, Color color, Warmth warmth, Fastener fastener,
-                 int usesPerCleanLevel, Length sleeves, Length length, Volume volume, Neckline neck,
-                 boolean pockets, Function function) {
+                 int usesPerCleanLevel, Length length, Function function, Length sleeves,
+                 Neckline neck, Volume volume, boolean pockets) {
         // constructor with everything passed-in
         super(material, textile, color, warmth, fastener, usesPerCleanLevel);
 
-
-        this.sleeves = sleeves;
         this.length = length;
-        this.volume = volume;
-        this.neck = neck;
-        this.pockets = pockets;
         this.function = function;
+        this.sleeves = sleeves;
+        this.neck = neck;
+        this.volume = volume;
+        this.pockets = pockets;
     }
 
     // Mutators

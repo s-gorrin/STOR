@@ -52,6 +52,16 @@ public class Compatible {
     }
 
     /**
+     * Remove a compatibility between two items but don't remove the whole items
+     * @param first     first ID
+     * @param second    second ID
+     */
+    public void remove(int first, int second) {
+        record.get(first).remove(second);
+        record.get(second).remove(first);
+    }
+
+    /**
      * Check if two items are compatible with each other
      * @param first     the ID of a Clothing item
      * @param second    the ID of a Clothing item

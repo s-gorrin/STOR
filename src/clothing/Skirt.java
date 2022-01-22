@@ -10,39 +10,38 @@ import java.util.Objects;
 public class Skirt extends Clothing {
 
     private Length length;
-    private Length waist;
-    private Volume volume;
-    private boolean pockets;
     private Function function;
+    private Volume volume;
+    private Length waist;
+    private boolean pockets;
 
     public Skirt() {
         // default constructor, allowing class attributes to be set manually
         super();
     }
 
-    public Skirt(Length length, Length waist, Volume volume, boolean pockets,
-    Function function) {
+    public Skirt(Length length, Function function, Length waist, Volume volume, boolean pockets) {
         // constructor with passed-in child class attributes but no parent attributes
         super();
 
         this.length = length;
-        this.waist = waist;
-        this.volume = volume;
-        this.pockets = pockets;
         this.function = function;
+        this.volume = volume;
+        this.waist = waist;
+        this.pockets = pockets;
     }
 
     public Skirt(Material material, Textile textile, Color color, Warmth warmth, Fastener fastener,
-                 int usesPerCleanLevel, Length length, Length waist, Volume volume, boolean pockets,
-                 Function function) {
+                 int usesPerCleanLevel, Length length, Function function, Length waist, Volume volume,
+                 boolean pockets) {
         // constructor with everything passed-in
         super(material, textile, color, warmth, fastener, usesPerCleanLevel);
 
         this.length = length;
+        this.function = function;
         this.waist = waist;
         this.volume = volume;
         this.pockets = pockets;
-        this.function = function;
     }
 
     // Mutators

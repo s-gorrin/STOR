@@ -9,7 +9,7 @@ public class CleanTest {
 
     @Test
     public void list() {
-        Assert.assertEquals(Clean.list(), "1. fresh\n2. okay\n3. passable\n4. wash\n");
+        Assert.assertEquals(Clean.list(), "1. fresh\n2. okay\n3. passable\n4. wash");
     }
 
     @Test (expected = ArrayIndexOutOfBoundsException.class)

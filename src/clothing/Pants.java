@@ -10,10 +10,10 @@ public class Pants extends Clothing {
     public static final Type type = Type.PANTS;
 
     private Length length;
+    private Function function;
     private Length waist;
     private boolean pockets;
     private boolean beltLoops;
-    private Function function;
 
     // Constructors
     public Pants() {
@@ -21,28 +21,28 @@ public class Pants extends Clothing {
         super();
     }
 
-    public Pants(Length length, Length waist, boolean pockets, boolean beltLoops, Function function) {
+    public Pants(Length length, Function function, Length waist, boolean pockets, boolean beltLoops) {
         // constructor with passed-in child class attributes but no parent attributes
         super();
 
         this.length = length;
+        this.function = function;
         this.waist = waist;
         this.pockets = pockets;
         this.beltLoops = beltLoops;
-        this.function = function;
     }
 
     public Pants(Material material, Textile textile, Color color, Warmth warmth,
-                 Fastener fastener, int usesPerCleanLevel, Length length, Length waist,
-                 boolean pockets, boolean beltLoops, Function function) {
+                 Fastener fastener, int usesPerCleanLevel, Length length, Function function,
+                 Length waist, boolean pockets, boolean beltLoops) {
         // Constructor with everything passed-in
         super(material, textile, color, warmth, fastener, usesPerCleanLevel);
 
         this.length = length;
+        this.function = function;
         this.waist = waist;
         this.pockets = pockets;
         this.beltLoops = beltLoops;
-        this.function = function;
     }
 
     // Mutators

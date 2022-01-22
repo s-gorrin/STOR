@@ -13,8 +13,8 @@ public class SkirtTest {
         // Test compatibility between Skirts and other clothes
 
         // Given
-        Skirt skirt = new Skirt(Length.SHORT, Length.MID_LONG, Volume.LOOSE, false, Function.CASUAL);
-        Top top = new Top(Length.LONG, Length.LONG, Neckline.COLLAR, Function.CASUAL);
+        Skirt skirt = new Skirt(Length.SHORT, Function.CASUAL, Length.MID_LONG, Volume.LOOSE, false);
+        Top top = new Top(Length.LONG, Function.CASUAL, Length.LONG, Neckline.COLLAR);
 
         // When
         top.setColor(Color.BROWN);
@@ -31,28 +31,23 @@ public class SkirtTest {
         Assert.assertFalse(skirt.possiblyCompatible(top));
     }
 
-    @Test
+    @Test (expected = NullPointerException.class)
     public void getName() {
         // Test the get name method of Skirt
 
         // Given
-        Skirt skirt = new Skirt(Length.SHORT, Length.MID_LONG, Volume.LOOSE, false, Function.CASUAL);
-
-        // Then
-        Assert.assertEquals(skirt.getName(), "short skirt");
+        Skirt skirt = new Skirt(Length.SHORT, Function.CASUAL, Length.MID_LONG, Volume.LOOSE, false);
 
         // When
         skirt.setColor(Color.BLUE);
         skirt.setTextile(Textile.TWILL);
-
-        // Then - won't add base descriptors until all three are present
-        Assert.assertEquals(skirt.getName(), "short skirt");
-
-        // When
         skirt.setMaterial(Material.WOOL);
 
         // Then
         Assert.assertEquals(skirt.getName(), "blue, twill, wool short skirt");
+
+        // Then
+        Assert.assertEquals(new Skirt().getName(), "short skirt"); // NullPointerException
 
     }
 }

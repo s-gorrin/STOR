@@ -73,6 +73,7 @@ public abstract class Clothing implements Sewable, Trackable {
     /**
      * A constructor for every parameter, including those that are normally set automatically,
      *      to recreate the item from a file.
+     * @param ID                    Reference number for it in the Closet
      * @param added                 Instant of first add
      * @param totalUses             Number of times it has been used
      * @param usesSinceCleaned      Number of times it has been used since cleaning
@@ -85,11 +86,10 @@ public abstract class Clothing implements Sewable, Trackable {
      * @param fastener              How it is fastened
      * @param usesPerCleanLevel     How many uses before it changes cleanliness rating
      * @param detail                A descriptive detail about it
-     * @param ID                    Reference number for it in the Closet
      */
-    public Clothing(Instant added, int totalUses, int usesSinceCleaned, Clean cleanLevel,
+    public Clothing(int ID, Instant added, int totalUses, int usesSinceCleaned, Clean cleanLevel,
                     Instant lastUsed, Material material, Textile textile, Color color,
-                    Warmth warmth, Fastener fastener, int usesPerCleanLevel, String detail, int ID) {
+                    Warmth warmth, Fastener fastener, int usesPerCleanLevel, String detail) {
         this.added = added;
 
         this.totalUses = totalUses;

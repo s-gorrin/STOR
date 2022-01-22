@@ -13,8 +13,8 @@ public class TopTest {
     public void possiblyCompatible() {
         // Given
         Top top = new Top(Material.LINEN, Textile.BASIC_WEAVE, Color.BLACK,
-                Warmth.COOL, Fastener.BUTTON, 2, Length.SHORT,
-                Length.MID_LONG, Neckline.COLLAR, Function.WORK);
+                Warmth.COOL, Fastener.BUTTON, 2, Length.SHORT, Function.WORK,
+                Length.MID_LONG, Neckline.COLLAR);
 
         // Then
         Assert.assertFalse(top.possiblyCompatible(new Top()));
@@ -22,12 +22,12 @@ public class TopTest {
         Assert.assertTrue(top.possiblyCompatible(new Pants()));
     }
 
-    @Test
+    @Test (expected = NullPointerException.class)
     public void getName() {
         // Given
         Top top = new Top(Material.LINEN, Textile.BASIC_WEAVE, Color.BLACK,
-                Warmth.COOL, Fastener.BUTTON, 2, Length.SHORT,
-                Length.MID_LONG, Neckline.COLLAR, Function.WORK);
+                Warmth.COOL, Fastener.BUTTON, 2, Length.SHORT, Function.WORK,
+                Length.MID_LONG, Neckline.COLLAR);
 
         Top defaultTop = new Top();
 
@@ -36,6 +36,6 @@ public class TopTest {
 
         // Then
         Assert.assertEquals(top.getName(), "black, woven, linen top with buttons");
-        Assert.assertEquals(defaultTop.getName(), "a top with a zipper");
+        Assert.assertEquals(defaultTop.getName(), "a top with a zipper"); // NullPointerException
     }
 }

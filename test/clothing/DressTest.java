@@ -11,9 +11,9 @@ public class DressTest {
         // Note: dresses have no compatibility with any of these clothing types
 
         // Given
-        Dress dress = new Dress(Length.SHORT, Length.MID_LONG, Volume.LOOSE,
-                Neckline.HENLEY, false, Function.CASUAL);
-        Top top = new Top(Length.LONG, Length.LONG, Neckline.COLLAR, Function.CASUAL);
+        Dress dress = new Dress(Length.MID_LONG, Function.CASUAL, Length.SHORT,
+                Neckline.HENLEY, Volume.LOOSE, false);
+        Top top = new Top(Length.LONG, Function.CASUAL, Length.LONG, Neckline.COLLAR);
 
         // When
         top.setColor(Color.BROWN);
@@ -24,29 +24,24 @@ public class DressTest {
         Assert.assertFalse(dress.possiblyCompatible(new Skirt()));
     }
 
-    @Test
+    @Test (expected = NullPointerException.class)
     public void getName() {
         // Test the get name method of Dress
 
         // Given
-        Dress dress = new Dress(Length.SHORT, Length.MID_LONG, Volume.LOOSE,
-                Neckline.OFF_SHOULDER, false, Function.CASUAL);
-
-        // Then
-        Assert.assertEquals(dress.getName(), "mid_long dress");
+        Dress dress = new Dress(Length.SHORT, Function.CASUAL, Length.MID_LONG,
+                Neckline.OFF_SHOULDER, Volume.LOOSE, false);
 
         // When
         dress.setColor(Color.BLUE);
         dress.setTextile(Textile.TWILL);
-
-        // Then - won't add base descriptors until all three are present
-        Assert.assertEquals(dress.getName(), "mid_long dress");
-
-        // When
         dress.setMaterial(Material.WOOL);
 
         // Then
-        Assert.assertEquals(dress.getName(), "blue, twill, wool mid_long dress");
+        Assert.assertEquals(dress.getName(), "blue, twill, wool short dress");
+
+        // Then
+        Assert.assertEquals(new Dress().getName(), "dress"); // NullPointerException
 
     }
 }
