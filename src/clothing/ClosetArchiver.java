@@ -295,9 +295,14 @@ public class ClosetArchiver {
                 String[] line = reader.nextLine().split(", ");
                 addLine(line, closet);
             }
+
+            reader.close();
         }
         catch (FileNotFoundException e) {
             System.out.println("Exception in ClosetArchiver: " + e);
+        }
+        catch (IllegalArgumentException e) {
+            System.out.println("Exception in ClosetArchiver: Some class was missing data.");
         }
 
         int count = Objects.requireNonNull(new File("archive/").listFiles()).length;
@@ -312,7 +317,7 @@ public class ClosetArchiver {
     }
 
     public static void main(String[] args) {
-        //ClosetArchiver.save(new Closet());
+        ClosetArchiver.save(new Closet());
 
         Closet fromArchive = ClosetArchiver.retrieve();
     }

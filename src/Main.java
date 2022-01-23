@@ -13,12 +13,9 @@ import java.util.Scanner;
 public class Main {
 
     /**
-     * Currently an example class showing adding different Clothing types to the Closet
-     * @param args none
+     * A non-production method to fill a Closet with values
      */
-    public static void main(String[] args) {
-        Closet closet = new Closet();
-
+    public static void fillCloset(Closet closet) {
         for (int i = 0; i < 5; i++)
             closet.add(new Top());
 
@@ -73,14 +70,26 @@ public class Main {
                 closet.get(ID).setFastener(Fastener.OTHER);
                 ((Skirt) closet.get(ID)).setPockets(false);
             }
+        }
+    }
 
+    /**
+     * Currently an example class showing adding different Clothing types to the Closet
+     * @param args none
+     */
+    public static void main(String[] args) {
+        Closet closet = new Closet();
+        fillCloset(closet);
+
+        for (int ID : closet.getAll()) {
+            // print the closet
             try {
                 System.out.println(closet.get(ID).getID() + ":" + closet.get(ID).getName());
-            }
-            catch (NullPointerException e) {
+            } catch (NullPointerException e) {
                 System.out.println(e + ": A class is missing some critical data.");
             }
         }
+
 
         ClosetArchiver.save(closet);
 
