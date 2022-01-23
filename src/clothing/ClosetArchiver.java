@@ -173,7 +173,7 @@ public class ClosetArchiver {
         return s.equals("true");
     }
 
-    // TODO: handle null CSV values
+    // TODO: handle null CSV values, probably with an Exception, "IncompleteDataException"
 
     /**
      * create an instance of the Top class from a CSV line
@@ -302,7 +302,7 @@ public class ClosetArchiver {
 
         int count = Objects.requireNonNull(new File("archive/").listFiles()).length;
         try {
-            Files.move(Paths.get(FILENAME), Paths.get("archive/archive-" + count + ".cvs"));
+            Files.move(Paths.get(FILENAME), Paths.get("archive/archive-" + count + ".csv"));
         }
         catch (IOException e) {
             System.out.println("Exception in ClosetArchiver: " + e);
