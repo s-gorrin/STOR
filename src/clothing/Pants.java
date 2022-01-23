@@ -2,6 +2,7 @@ package clothing;
 
 import clothing.trait.*;
 
+import java.time.Instant;
 import java.util.Objects;
 
 public class Pants extends Clothing {
@@ -16,13 +17,23 @@ public class Pants extends Clothing {
     private boolean beltLoops;
 
     // Constructors
+
+    /**
+     * default constructor, allowing class attributes to be set manually
+     */
     public Pants() {
-        // default constructor, allowing class attributes to be set manually
         super();
     }
 
+    /**
+     * constructor with passed-in child class attributes but no parent attributes
+     * @param length     how long it is going down
+     * @param function   when to wear it
+     * @param waist      how high the waist is
+     * @param pockets    does it have functional pockets
+     * @param beltLoops  does it have functional belt loops
+     */
     public Pants(Length length, Function function, Length waist, boolean pockets, boolean beltLoops) {
-        // constructor with passed-in child class attributes but no parent attributes
         super();
 
         this.length = length;
@@ -32,11 +43,61 @@ public class Pants extends Clothing {
         this.beltLoops = beltLoops;
     }
 
+    /**
+     * Constructor with all parameters passed in
+     * @param material              What material it is made of
+     * @param textile               How it is constructed
+     * @param color                 What the primary color is
+     * @param warmth                How warm it is to wear
+     * @param fastener              How it is fastened
+     * @param usesPerCleanLevel     How many uses before it changes cleanliness rating
+     * @param length                Child attribute: how long it is going down
+     * @param function              Child attribute: when to wear it
+     * @param waist                 Child attribute: how high the waist is
+     * @param pockets               Child attribute: does it have functional pockets
+     * @param beltLoops             Child attribute: does it have functional belt loops
+     */
     public Pants(Material material, Textile textile, Color color, Warmth warmth,
                  Fastener fastener, int usesPerCleanLevel, Length length, Function function,
                  Length waist, boolean pockets, boolean beltLoops) {
-        // Constructor with everything passed-in
         super(material, textile, color, warmth, fastener, usesPerCleanLevel);
+
+        this.length = length;
+        this.function = function;
+        this.waist = waist;
+        this.pockets = pockets;
+        this.beltLoops = beltLoops;
+    }
+
+    /**
+     * A constructor for every parameter, including those that are normally set automatically,
+     *      to recreate the item from a file.
+     * @param ID                    Reference number for it in the Closet
+     * @param added                 Instant of first add
+     * @param totalUses             Number of times it has been used
+     * @param usesSinceCleaned      Number of times it has been used since cleaning
+     * @param cleanLevel            Current level of cleanliness
+     * @param lastUsed              Instant of most recent use
+     * @param material              What material it is made of
+     * @param textile               How it is constructed
+     * @param color                 What the primary color is
+     * @param warmth                How warm it is to wear
+     * @param fastener              How it is fastened
+     * @param usesPerCleanLevel     How many uses before it changes cleanliness rating
+     * @param detail                A descriptive detail about it
+     * @param length                Child attribute: how long it is going down
+     * @param function              Child attribute: when to wear it
+     * @param waist                 Child attribute: how high the waist is
+     * @param pockets               Child attribute: does it have functional pockets
+     * @param beltLoops             Child attribute: does it have functional belt loops
+     */
+    public Pants(int ID, Instant added, int totalUses, int usesSinceCleaned, Clean cleanLevel,
+                 Instant lastUsed, Material material, Textile textile, Color color,
+                 Warmth warmth, Fastener fastener, int usesPerCleanLevel, String detail,
+                 Length length, Function function, Length waist, Volume volume, boolean pockets,
+                 boolean beltLoops) {
+        super(ID, added, totalUses, usesSinceCleaned, cleanLevel, lastUsed, material, textile,
+                color, warmth, fastener, usesPerCleanLevel, detail);
 
         this.length = length;
         this.function = function;

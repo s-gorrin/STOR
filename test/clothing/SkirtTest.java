@@ -13,7 +13,7 @@ public class SkirtTest {
         // Test compatibility between Skirts and other clothes
 
         // Given
-        Skirt skirt = new Skirt(Length.SHORT, Function.CASUAL, Length.MID_LONG, Volume.LOOSE, false);
+        Skirt skirt = new Skirt(Length.SHORT, Function.CASUAL, Volume.LOOSE, Length.MID_LONG, false);
         Top top = new Top(Length.LONG, Function.CASUAL, Length.LONG, Neckline.COLLAR);
 
         // When
@@ -36,7 +36,7 @@ public class SkirtTest {
         // Test the get name method of Skirt
 
         // Given
-        Skirt skirt = new Skirt(Length.SHORT, Function.CASUAL, Length.MID_LONG, Volume.LOOSE, false);
+        Skirt skirt = new Skirt(Length.SHORT, Function.CASUAL, Volume.LOOSE, Length.MID_LONG, false);
 
         // When
         skirt.setColor(Color.BLUE);

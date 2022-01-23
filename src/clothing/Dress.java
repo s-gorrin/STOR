@@ -2,6 +2,7 @@ package clothing;
 
 import clothing.trait.*;
 
+import java.time.Instant;
 import java.util.Objects;
 
 /**
@@ -17,14 +18,23 @@ public class Dress extends Clothing {
     private boolean pockets;
 
     // Constructors
-
+    /**
+     * default constructor, allowing class attributes to be set manually
+     */
     public Dress() {
-        // default constructor, allowing class attributes to be set manually
         super();
     }
 
+    /**
+     * constructor with passed-in child class attributes but no parent attributes
+     * @param length    how long it is going down
+     * @param function  when to wear it
+     * @param sleeves   how long the sleeves are
+     * @param neck      the type of neckline
+     * @param volume    how much air fits under the skirt
+     * @param pockets   does it have functional pockets
+     */
     public Dress(Length length, Function function, Length sleeves, Neckline neck, Volume volume, boolean pockets) {
-        // constructor with passed-in child class attributes but no parent attributes
         super();
 
         this.length = length;
@@ -35,11 +45,64 @@ public class Dress extends Clothing {
         this.pockets = pockets;
     }
 
+    /**
+     * constructor with everything passed-in
+     * @param material              What material it is made of
+     * @param textile               How it is constructed
+     * @param color                 What the primary color is
+     * @param warmth                How warm it is to wear
+     * @param fastener              How it is fastened
+     * @param usesPerCleanLevel     How many uses before it changes cleanliness rating
+     * @param length                Child attribute: how long it is going down
+     * @param function              Child attribute: when to wear it
+     * @param sleeves               Child attribute: how long the sleeves are
+     * @param neck                  Child attribute: the type of neckline
+     * @param volume                Child attribute: how much air fits under the skirt
+     * @param pockets               Child attribute: does it have functional pockets
+     */
     public Dress(Material material, Textile textile, Color color, Warmth warmth, Fastener fastener,
                  int usesPerCleanLevel, Length length, Function function, Length sleeves,
                  Neckline neck, Volume volume, boolean pockets) {
-        // constructor with everything passed-in
         super(material, textile, color, warmth, fastener, usesPerCleanLevel);
+
+        this.length = length;
+        this.function = function;
+        this.sleeves = sleeves;
+        this.neck = neck;
+        this.volume = volume;
+        this.pockets = pockets;
+    }
+
+    /**
+     * A constructor for every parameter, including those that are normally set automatically,
+     *      to recreate the item from a file.
+     * @param ID                    Reference number for it in the Closet
+     * @param added                 Instant of first add
+     * @param totalUses             Number of times it has been used
+     * @param usesSinceCleaned      Number of times it has been used since cleaning
+     * @param cleanLevel            Current level of cleanliness
+     * @param lastUsed              Instant of most recent use
+     * @param material              What material it is made of
+     * @param textile               How it is constructed
+     * @param color                 What the primary color is
+     * @param warmth                How warm it is to wear
+     * @param fastener              How it is fastened
+     * @param usesPerCleanLevel     How many uses before it changes cleanliness rating
+     * @param detail                A descriptive detail about it
+     * @param length                Child attribute: how long it is going down
+     * @param function              Child attribute: when to wear it
+     * @param sleeves               Child attribute: how long the sleeves are
+     * @param neck                  Child attribute: the type of neckline
+     * @param volume                Child attribute: how much air fits under the skirt
+     * @param pockets               Child attribute: does it have functional pockets
+     */
+    public Dress(int ID, Instant added, int totalUses, int usesSinceCleaned, Clean cleanLevel,
+                 Instant lastUsed, Material material, Textile textile, Color color,
+                 Warmth warmth, Fastener fastener, int usesPerCleanLevel, String detail,
+                 Length length, Function function, Length sleeves, Neckline neck, Volume volume,
+                 boolean pockets) {
+        super(ID, added, totalUses, usesSinceCleaned, cleanLevel, lastUsed, material, textile,
+                color, warmth, fastener, usesPerCleanLevel, detail);
 
         this.length = length;
         this.function = function;
