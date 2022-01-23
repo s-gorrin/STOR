@@ -113,14 +113,19 @@ public class Dress extends Clothing {
     }
 
     // Mutators
-    public void setSleeves(Length sleeves) {
-        if (this.sleeves == null)
-            this.sleeves = sleeves;
-    }
-
     public void setLength(Length length) {
         if (this.length == null)
             this.length = length;
+    }
+
+    public void setFunction(Function function) {
+        if (this.function == null)
+            this.function = function;
+    }
+
+    public void setSleeves(Length sleeves) {
+        if (this.sleeves == null)
+            this.sleeves = sleeves;
     }
 
     public void setNeck(Neckline neck) {
@@ -128,13 +133,13 @@ public class Dress extends Clothing {
             this.neck = neck;
     }
 
-    public void setPockets(boolean pockets) {
-        this.pockets = pockets;
+    public void setVolume(Volume volume) {
+        if (this.volume == null)
+            this.volume = volume;
     }
 
-    public void setFunction(Function function) {
-        if (this.function == null)
-            this.function = function;
+    public void setPockets(boolean pockets) {
+        this.pockets = pockets;
     }
 
 
