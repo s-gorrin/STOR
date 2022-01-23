@@ -117,45 +117,72 @@ public abstract class Clothing implements Sewable, Trackable {
     }
 
     // Mutators
-    public void setMaterial(Material material) {
-        // Set trait only if it does not already have one
+    /**
+     * Set trait only if it does not already have one
+     * @param material  what is it made out of
+     */
+     public void setMaterial(Material material) {
         if (this.material == null)
             this.material = material;
     }
 
+    /**
+     * Set trait only if it does not already have one
+     * @param textile   how the fabric is constructed
+     */
     public void setTextile(Textile textile) {
-        // Set trait only if it does not already have one
         if (this.textile == null)
             this.textile = textile;
     }
 
+    /**
+     * Set trait only if it does not already have one
+     * @param color what color is it
+     */
     public void setColor(Color color) {
-        // Set trait only if it does not already have one
         if (this.color == null)
             this.color = color;
     }
 
+    /**
+     * Set trait only if it does not already have one
+     * @param warmth    how warm it is
+     */
     public void setWarmth(Warmth warmth) {
-        // Set trait only if it does not already have one
         if (this.warmth == null)
             this.warmth = warmth;
     }
 
+    /**
+     * Set trait only if it does not already have one
+     * @param fastener  what type of fastener it has
+     */
     public void setFastener(Fastener fastener) {
         if (this.fastener == null)
             this.fastener = fastener;
     }
 
+    /**
+     * set the detail parameter
+     * @param detail    a descriptive detail about the item
+     */
     public void setDetail(String detail) {
         this.detail = detail;
     }
 
+    /**
+     * set a new usesPerCleanLevel only if one has not yet been set
+     * @param uses  how many times it can be used before the next level of dirtiness
+     */
     public void setUsesPerCleanLevel(int uses) {
-        // set a new usesPerCleanLevel only if one has not yet been set
         if (usesPerCleanLevel == 1)
             usesPerCleanLevel = uses;
     }
 
+    /**
+     * set an ID - should only be able to happen once
+     * @param ID    the ID in the closet and compatibility table
+     */
     public void setID(int ID) {
         if (!IDset) { // ID should only be set one time
             this.ID = ID;
@@ -163,8 +190,10 @@ public abstract class Clothing implements Sewable, Trackable {
         }
     }
 
+    /**
+     * increment the use counters, update cleanLevel
+     */
     public void addUse() {
-        // increment the use counters, update cleanLevel
         totalUses++;
         usesSinceCleaned++;
 
@@ -180,8 +209,10 @@ public abstract class Clothing implements Sewable, Trackable {
         lastUsed = Instant.now(); // set to today
     }
 
+    /**
+     * reset the sinceCleaned counter, cleanLevel
+     */
     public void clean() {
-        // reset the sinceCleaned counter, cleanLevel
         usesSinceCleaned = 0;
         cleanLevel = Clean.FRESH;
     }
@@ -189,10 +220,14 @@ public abstract class Clothing implements Sewable, Trackable {
     // Accessors
     public abstract Type getType();
 
+    /**
+     * get a descriptive name for the clothing from some of its traits
+     * example: green, loose_knit, cotton
+     * @param childName                 The name of the calling child class
+     * @return                          a String containing the name
+     * @throws NullPointerException     thrown if any name-relevant data is absent
+     */
     public String getName(String childName) throws NullPointerException {
-        // POST-CONDITION: a name, generated from traits, is returned
-        // example: green, loose_knit, cotton
-
         StringBuilder name = new StringBuilder();
         name.append(color.toString().toLowerCase());
 
@@ -213,67 +248,125 @@ public abstract class Clothing implements Sewable, Trackable {
         return name + " " + childName + Fastener.getDescription(fastener);
     }
 
+    /**
+     * accessor
+     * @return  what it's made of
+     */
     public Material getMaterial() {
         return material;
     }
 
+    /**
+     * accessor
+     * @return  how it's constructed
+     */
     public Textile getTextile() {
         return textile;
     }
 
+    /**
+     * accessor
+     * @return  what color it is
+     */
     public Color getColor() {
         return color;
     }
 
+    /**
+     * accessor
+     * @return  how warm it is
+     */
     public Warmth getWarmth() {
         return warmth;
     }
 
+    /**
+     * accessor
+     * @return  what holds it shut
+     */
     public Fastener getFastener() {
         return fastener;
     }
 
+    /**
+     * accessor
+     * @return  a descriptive detail
+     */
     public String getDetail() {
         return detail;
     }
 
+    /**
+     * accessor
+     * @return  how many times has it been used
+     */
     public int getTotalUses() {
         return totalUses;
     }
 
+    /**
+     * accessor
+     * @return  how many times has it been used since cleaning
+     */
     public int getUsesSinceCleaned() {
         return usesSinceCleaned;
     }
 
+    /**
+     * accessor
+     * @return  when it was added
+     */
     public Instant getAdded() {
         return added;
     }
 
+    /**
+     * how many days since the item was added
+     * @return  the age of the item in days
+     */
     public long getAge() {
-        // POST-CONDITION: the number of days since the item was added is returned
         return added.until(Instant.now(), ChronoUnit.DAYS);
     }
 
-    /** @return the last Instant the Clothing was used, or null */
+    /**
+     * accessor
+     * @return the last Instant the Clothing was used, or null
+     * */
     public Instant getLastUsed() {
         return lastUsed;
     }
 
-    /** @return the index of the Clothing or -1 if it has not yet been assigned */
+    /**
+     * accessor
+     * @return the index of the Clothing or -1 if it has not yet been assigned
+     * */
     public int getID() {
         return ID;
     }
 
+    /**
+     * accessor
+     * @return  how many times it can be used per level of cleanliness
+     */
     public int getUsesPerCleanLevel() {
         return usesPerCleanLevel;
     }
 
+    /**
+     * accessor
+     * @return  how clean it is
+     */
     public Clean getCleanLevel() {
         return cleanLevel;
     }
 
+    /**
+     * is the calling item possibly compatible with the passed-in item
+     * currently this is just checking compatible colors
+     * @param item  an instance of a type of Clothing
+     * @return      true if they could be compatible, false if not
+     */
     public boolean possiblyCompatible(Clothing item) {
-        // POST-CONDITION: the possibility of a clothing item being compatible is returned
         return Color.compatible(this.color, item.getColor());
     }
 }

@@ -173,8 +173,6 @@ public class ClosetArchiver {
         return s.equals("true");
     }
 
-    // TODO: handle null CSV values, probably with an Exception, "IncompleteDataException"
-
     /**
      * create an instance of the Top class from a CSV line
      * @param l  A line from the file

@@ -172,10 +172,13 @@ public class Dress extends Clothing {
         return function;
     }
 
+    /**
+     * a preliminary compatability checker
+     * @param item  an instance of a type of Clothing
+     * @return      true if the items might be compatible, false if not
+     */
     @Override
     public boolean possiblyCompatible(Clothing item) {
-        // A preliminary checker of compatibility with other clothing items
-        // POST-CONDITION: if the item could be compatible, true is returned. Otherwise, false
         if (item instanceof Dress || item instanceof Top || item instanceof Pants || item instanceof Skirt)
             return false;
 
@@ -185,9 +188,13 @@ public class Dress extends Clothing {
         return true;
     }
 
+    /**
+     * get a descriptive name from traits of the class
+     * example: yellow, woven, cotton long dress with a drawstring
+     * @return                      a descriptive name
+     * @throws NullPointerException if a data point is missing
+     */
     public String getName() throws NullPointerException {
-        // POST-CONDITION: a descriptive name is returned
-        // example: yellow, woven, cotton long dress with a drawstring
         String base = length.toString().toLowerCase() + " dress";
 
         if (!Objects.equals(getDetail(), ""))
