@@ -37,6 +37,21 @@ public class Closet {
     }
 
     /**
+     * Add an item to the closet and set its ID attribute
+     * POST_CONDITION: The index of the added item in the Vector is returned
+     * @param item  the Clothing to be added
+     * @param ID    the ID of the clothing, from a saved Closet file
+     * @return      the ID of the clothing that was added
+     */
+    public int add(Clothing item, int ID) {
+        item.setID(ID);
+        closet.put(ID, item);
+
+        nextID = ID + 1; // set up nextID for next non-closet addition
+        return ID;
+    }
+
+    /**
      * POST-CONDITION: the Clothing corresponding to the ID is removed from closet and returned
      * @param ID    the ID of the item to be removed
      * @return      the Clothing that was removed

@@ -29,7 +29,8 @@ public abstract class Clothing implements Sewable, Trackable {
     private Clean cleanLevel;
     private int usesPerCleanLevel;
 
-    private int ID = -1; // the ID of the item in the Closet
+    private int ID; // the ID of the item in the Closet
+    private boolean IDset;
 
     // Constructors
 
@@ -43,6 +44,8 @@ public abstract class Clothing implements Sewable, Trackable {
         usesSinceCleaned = 0;
         cleanLevel = Clean.FRESH;
         usesPerCleanLevel = 1;
+
+        IDset = false;
     }
 
     /**
@@ -68,6 +71,8 @@ public abstract class Clothing implements Sewable, Trackable {
         this.color = color;
         this.warmth = warmth;
         this.fastener = fastener;
+
+        IDset = false;
     }
 
     /**
@@ -107,6 +112,8 @@ public abstract class Clothing implements Sewable, Trackable {
 
         this.detail = detail;
         this.ID = ID;
+
+        IDset = true;
     }
 
     // Mutators
@@ -150,8 +157,10 @@ public abstract class Clothing implements Sewable, Trackable {
     }
 
     public void setID(int ID) {
-        if (ID == -1)
+        if (!IDset) { // ID should only be set one time
             this.ID = ID;
+            IDset = true;
+        }
     }
 
     public void addUse() {

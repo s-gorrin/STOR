@@ -46,7 +46,7 @@ public class Main {
                 ((Skirt)closet.get(ID)).setLength(Length.SHORT);
 
             try {
-                System.out.println(closet.get(ID).getName());
+                System.out.println(closet.get(ID).getID() + ":" + closet.get(ID).getName());
             }
             catch (NullPointerException e) {
                 System.out.println(e + ": A class is missing some critical data.");
@@ -66,7 +66,7 @@ public class Main {
                     if (line.charAt(i) == ',')
                         count++;
                 }
-                System.out.println(line.charAt(0) + ": " + count);
+                System.out.println(line.charAt(0) + "" + line.charAt(1) + ": " + count);
             }
 
             reader.close();

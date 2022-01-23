@@ -94,7 +94,7 @@ public class Pants extends Clothing {
     public Pants(int ID, Instant added, int totalUses, int usesSinceCleaned, Clean cleanLevel,
                  Instant lastUsed, Material material, Textile textile, Color color,
                  Warmth warmth, Fastener fastener, int usesPerCleanLevel, String detail,
-                 Length length, Function function, Length waist, Volume volume, boolean pockets,
+                 Length length, Function function, Length waist, boolean pockets,
                  boolean beltLoops) {
         super(ID, added, totalUses, usesSinceCleaned, cleanLevel, lastUsed, material, textile,
                 color, warmth, fastener, usesPerCleanLevel, detail);
