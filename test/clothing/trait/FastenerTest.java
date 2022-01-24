@@ -3,8 +3,6 @@ package clothing.trait;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 /**
  * test class for the static method of the Fastener enum
  */

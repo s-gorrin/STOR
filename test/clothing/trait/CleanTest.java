@@ -3,8 +3,6 @@ package clothing.trait;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 public class CleanTest {
 
     @Test
@@ -16,5 +14,6 @@ public class CleanTest {
     public void get() {
         Assert.assertEquals(Clean.get(1), Clean.FRESH);
         Clean test = Clean.get(56); // throws exception
+        Assert.assertNull(test);
     }
 }

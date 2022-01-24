@@ -1,13 +1,18 @@
 package clothing;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Scanner;
 
 /**
  * A class to track compatibility of Clothing items, by ID
  * (so they don't have to do it themselves)
  */
 public class Compatible {
+    public static final String FILENAME = "comp.csv";
 
     private final HashMap<Integer, HashSet<Integer>> record;
 
@@ -76,18 +81,40 @@ public class Compatible {
     }
 
     /**
-     * Store the compatibility record in a file
-     * @return true if successful, false if not
+     * Store the compatibility record in a file.
+     * File format: w, x, y, z
+     * Where w is the ID and x, y, x are compatible IDs
      */
-    public boolean writeToFile() {
-        return true;
+    public void writeToFile() throws IOException {
+        FileWriter writer = new FileWriter(FILENAME);
+
+        for (Integer ID : record.keySet()) {
+            StringBuilder line = new StringBuilder(ID + ", ");
+            for (Integer val : record.get(ID))
+                line.append(val).append(", ");
+
+            line.replace(line.length() - 2, line.length(), "\n");
+            writer.write(line.toString());
+        }
+
+        writer.flush();
+        writer.close();
     }
 
     /**
      * Read the compatibility record from a file
-     * @return true if successful, false if not
+     * For each line, index 0 is the ID,
+     * and all subsequent numbers are compatible items with that ID
      */
-    public boolean readFromFile() {
-        return true;
+    public void readFromFile() throws IOException {
+        Scanner reader = new Scanner(new File(FILENAME));
+
+        while (reader.hasNextLine()) {
+            String[] line = reader.nextLine().split(", ");
+            for (int i = 1; i < line.length; i++)
+                add(Integer.parseInt(line[0]), Integer.parseInt(line[i]));
+        }
+
+        reader.close();
     }
 }

@@ -3,8 +3,6 @@ package clothing.trait;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 public class ColorTest {
 
     @Test
@@ -28,5 +26,6 @@ public class ColorTest {
     public void get() {
         Assert.assertEquals(Color.get(1), Color.BLACK);
         Color test = Color.get(56);
+        Assert.assertNull(test);
     }
 }

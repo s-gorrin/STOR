@@ -4,8 +4,6 @@ import clothing.trait.*;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 public class TopTest {
     // A test class for the Top class, not including set/get functions
 
@@ -17,8 +15,8 @@ public class TopTest {
                 Length.MID_LONG, Neckline.COLLAR);
 
         // Then
-        Assert.assertFalse(top.possiblyCompatible(new Top()));
         Assert.assertFalse(top.possiblyCompatible(new Dress()));
+        Assert.assertTrue(top.possiblyCompatible(new Top())); // update: multiple tops are possible in an outfit
         Assert.assertTrue(top.possiblyCompatible(new Pants()));
     }
 

@@ -2,13 +2,6 @@ import clothing.*;
 import clothing.trait.*;
 import org.junit.Assert;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.time.Instant;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Scanner;
 
 public class Main {
 
@@ -91,7 +84,8 @@ public class Main {
         }
 
 
-        ClosetArchiver.save(closet);
+        if (!ClosetArchiver.save(closet))
+            System.out.println("Closet failed to save.");
 
         Closet savedCloset = ClosetArchiver.retrieve();
 
