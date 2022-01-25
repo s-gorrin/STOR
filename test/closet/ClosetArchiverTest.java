@@ -1,5 +1,6 @@
-package clothing;
+package closet;
 
+import clothing.Pants;
 import clothing.trait.*;
 import org.junit.Assert;
 import org.junit.Test;

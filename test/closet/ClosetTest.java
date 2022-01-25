@@ -1,14 +1,17 @@
-import closet.Closet;
-import closet.ClosetArchiver;
-import clothing.*;
+package closet;
+
+import clothing.Dress;
+import clothing.Pants;
+import clothing.Skirt;
+import clothing.Top;
 import clothing.trait.*;
 import org.junit.Assert;
+import org.junit.Test;
 
-
-public class Main {
+public class ClosetTest {
 
     /**
-     * A non-production method to fill a Closet with values
+     * Fill a Closet with values
      */
     public static void fillCloset(Closet closet) {
         for (int i = 0; i < 5; i++)
@@ -68,33 +71,70 @@ public class Main {
         }
     }
 
-    /**
-     * Currently an example class showing adding different Clothing types to the Closet
-     * @param args none
-     */
-    public static void main(String[] args) {
+    @Test
+    public void add() {
         Closet closet = new Closet();
+
+        Pants pants = new Pants(Material.WOOL, Textile.TWILL, Color.PURPLE,
+                Warmth.WARM, Fastener.BUTTON, 2, Length.LONG,
+                Function.CASUAL, Length.MEDIUM, true, true);
+
+        closet.add(pants);
+        closet.add(new Top(), 1);
+
+        Assert.assertTrue(closet.contains(0)); // ID 0 is present
+        Assert.assertEquals(pants, closet.get(0)); // ID 0 is what it should be
+        Assert.assertTrue(closet.contains(1));
+        Assert.assertNotEquals(pants, closet.get(1));
+
+        Assert.assertFalse(closet.contains(5)); // an ID that shouldn't be there isn't
+    }
+
+    @Test
+    public void remove() {
+        Closet closet = new Closet();
+
+        Pants pants = new Pants(Material.WOOL, Textile.TWILL, Color.PURPLE,
+                Warmth.WARM, Fastener.BUTTON, 2, Length.LONG,
+                Function.CASUAL, Length.MEDIUM, true, true);
+
+        closet.add(pants);
+        closet.add(new Top(), 1);
+
+        Assert.assertTrue(closet.contains(1));
+
+        closet.remove(1);
+
+        Assert.assertFalse(closet.contains(1));
+
+        Pants removedPants = (Pants)closet.remove(0);
+
+        Assert.assertEquals(pants, removedPants);
+        Assert.assertEquals(0, closet.size());
+    }
+
+    @Test
+    public void getNumberOf() {
+        Closet closet = new Closet();
+
         fillCloset(closet);
 
-        for (int ID : closet.getAll()) {
-            // print the closet
-            try {
-                System.out.println(closet.get(ID).getID() + ":" + closet.get(ID).getName());
-            } catch (NullPointerException e) {
-                System.out.println(e + ": A class is missing some critical data.");
-            }
-        }
+        Assert.assertEquals(5, closet.getNumberOf(Type.TOP));
+        Assert.assertEquals(4, closet.getNumberOf(Type.DRESS));
+        Assert.assertNotEquals(5, closet.getNumberOf(Type.PANTS));
+        Assert.assertNotEquals(5, closet.getNumberOf(Type.SKIRT));
+    }
 
+    @Test
+    public void size() {
+        Closet closet = new Closet();
 
-        if (!ClosetArchiver.save(closet))
-            System.out.println("Closet failed to save.");
+        closet.add(new Dress());
 
-        Closet savedCloset = ClosetArchiver.retrieve();
+        Assert.assertEquals(1, closet.size());
 
-        // if this passes, it means the item in savedCloset is the same as the item in closet :)
-        Assert.assertEquals(closet.get(2).getAdded(), savedCloset.get(2).getAdded());
-        System.out.println("Success");
+        fillCloset(closet);
 
-
+        Assert.assertEquals(15, closet.size());
     }
 }

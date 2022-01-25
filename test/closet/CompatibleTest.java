@@ -1,4 +1,4 @@
-package clothing;
+package closet;
 
 import org.junit.Assert;
 import org.junit.Test;

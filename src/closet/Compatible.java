@@ -1,4 +1,4 @@
-package clothing;
+package closet;
 
 import java.io.File;
 import java.io.FileWriter;

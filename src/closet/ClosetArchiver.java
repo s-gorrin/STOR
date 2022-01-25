@@ -1,19 +1,17 @@
-package clothing;
+package closet;
 
 
+import clothing.*;
 import clothing.trait.*;
 
 import java.io.*;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.Instant;
-import java.util.Locale;
 import java.util.Objects;
 import java.util.Scanner;
 
 import static java.lang.Integer.parseInt;
-import static java.lang.Integer.valueOf;
 
 /**
  * A class to store and retrieve Closet data to and from a CSV file
@@ -287,7 +285,7 @@ public class ClosetArchiver {
 
         try {
             Scanner reader = new Scanner(new File(FILENAME));
-            String[] fields = reader.nextLine().split(", ");
+            reader.nextLine(); // the first line is field labels
 
             while (reader.hasNextLine()) {
                 String[] line = reader.nextLine().split(", ");
@@ -312,11 +310,5 @@ public class ClosetArchiver {
         }
 
         return closet;
-    }
-
-    public static void main(String[] args) {
-        ClosetArchiver.save(new Closet());
-
-        Closet fromArchive = ClosetArchiver.retrieve();
     }
 }
