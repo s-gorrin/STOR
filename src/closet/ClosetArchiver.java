@@ -176,18 +176,23 @@ public class ClosetArchiver {
      * @param l  A line from the file
      * @return   A new Top
      */
-    private static Top topFromCSV(String[] l) {
+    private static Top topFromCSV(String[] l) throws MissingDataException {
         Instant lastUsed = null;
         if (!l[6].equals("null"))
             lastUsed = Instant.parse(l[6]);
 
-        return new Top(parseInt(l[0]), Instant.parse(l[2]), parseInt(l[3]), parseInt(l[4]),
-                Clean.valueOf(l[5].toUpperCase()), lastUsed, Material.valueOf(l[7].toUpperCase()),
-                Textile.valueOf(l[8].toUpperCase()), Color.valueOf(l[9].toUpperCase()),
-                Warmth.valueOf(l[10].toUpperCase()), Fastener.valueOf(l[11].toUpperCase()),
-                parseInt(l[12]), l[13], Length.valueOf(l[14].toUpperCase()),
-                Function.valueOf(l[15].toUpperCase()), Length.valueOf(l[16].toUpperCase()),
-                Neckline.valueOf(l[17].toUpperCase()));
+        try {
+            return new Top(parseInt(l[0]), Instant.parse(l[2]), parseInt(l[3]), parseInt(l[4]),
+                    Clean.valueOf(l[5].toUpperCase()), lastUsed, Material.valueOf(l[7].toUpperCase()),
+                    Textile.valueOf(l[8].toUpperCase()), Color.valueOf(l[9].toUpperCase()),
+                    Warmth.valueOf(l[10].toUpperCase()), Fastener.valueOf(l[11].toUpperCase()),
+                    parseInt(l[12]), l[13], Length.valueOf(l[14].toUpperCase()),
+                    Function.valueOf(l[15].toUpperCase()), Length.valueOf(l[16].toUpperCase()),
+                    Neckline.valueOf(l[17].toUpperCase()));
+        }
+        catch (IllegalArgumentException e) {
+            throw new MissingDataException("Some data was missing in topFromCSV()");
+        }
     }
 
     /**
@@ -195,18 +200,23 @@ public class ClosetArchiver {
      * @param l  A line from the file
      * @return   A new Skirt
      */
-    private static Skirt skirtFromCSV(String[] l) {
+    private static Skirt skirtFromCSV(String[] l) throws MissingDataException {
         Instant lastUsed = null;
         if (!l[6].equals("null"))
             lastUsed = Instant.parse(l[6]);
 
-        return new Skirt(parseInt(l[0]), Instant.parse(l[2]), parseInt(l[3]), parseInt(l[4]),
-                Clean.valueOf(l[5].toUpperCase()), lastUsed, Material.valueOf(l[7].toUpperCase()),
-                Textile.valueOf(l[8].toUpperCase()), Color.valueOf(l[9].toUpperCase()),
-                Warmth.valueOf(l[10].toUpperCase()), Fastener.valueOf(l[11].toUpperCase()),
-                parseInt(l[12]), l[13], Length.valueOf(l[14].toUpperCase()),
-                Function.valueOf(l[15].toUpperCase()), Volume.valueOf(l[18].toUpperCase()),
-                Length.valueOf(l[19].toUpperCase()), bool(l[20]));
+        try {
+            return new Skirt(parseInt(l[0]), Instant.parse(l[2]), parseInt(l[3]), parseInt(l[4]),
+                    Clean.valueOf(l[5].toUpperCase()), lastUsed, Material.valueOf(l[7].toUpperCase()),
+                    Textile.valueOf(l[8].toUpperCase()), Color.valueOf(l[9].toUpperCase()),
+                    Warmth.valueOf(l[10].toUpperCase()), Fastener.valueOf(l[11].toUpperCase()),
+                    parseInt(l[12]), l[13], Length.valueOf(l[14].toUpperCase()),
+                    Function.valueOf(l[15].toUpperCase()), Volume.valueOf(l[18].toUpperCase()),
+                    Length.valueOf(l[19].toUpperCase()), bool(l[20]));
+        }
+        catch (IllegalArgumentException e) {
+            throw new MissingDataException("Some data was missing in skirtFromCSV()");
+        }
     }
 
     /**
@@ -214,18 +224,23 @@ public class ClosetArchiver {
      * @param l  A line from the file
      * @return   A new Pants
      */
-    private static Pants pantsFromCSV(String[] l) {
+    private static Pants pantsFromCSV(String[] l) throws MissingDataException {
         Instant lastUsed = null;
         if (!l[6].equals("null"))
             lastUsed = Instant.parse(l[6]);
 
-        return new Pants(parseInt(l[0]), Instant.parse(l[2]), parseInt(l[3]), parseInt(l[4]),
-                Clean.valueOf(l[5].toUpperCase()), lastUsed, Material.valueOf(l[7].toUpperCase()),
-                Textile.valueOf(l[8].toUpperCase()), Color.valueOf(l[9].toUpperCase()),
-                Warmth.valueOf(l[10].toUpperCase()), Fastener.valueOf(l[11].toUpperCase()),
-                parseInt(l[12]), l[13], Length.valueOf(l[14].toUpperCase()),
-                Function.valueOf(l[15].toUpperCase()), Length.valueOf(l[19].toUpperCase()),
-                bool(l[20]), bool(l[21]));
+        try {
+            return new Pants(parseInt(l[0]), Instant.parse(l[2]), parseInt(l[3]), parseInt(l[4]),
+                    Clean.valueOf(l[5].toUpperCase()), lastUsed, Material.valueOf(l[7].toUpperCase()),
+                    Textile.valueOf(l[8].toUpperCase()), Color.valueOf(l[9].toUpperCase()),
+                    Warmth.valueOf(l[10].toUpperCase()), Fastener.valueOf(l[11].toUpperCase()),
+                    parseInt(l[12]), l[13], Length.valueOf(l[14].toUpperCase()),
+                    Function.valueOf(l[15].toUpperCase()), Length.valueOf(l[19].toUpperCase()),
+                    bool(l[20]), bool(l[21]));
+        }
+        catch (IllegalArgumentException e) {
+            throw new MissingDataException("Some data was missing in pantsFromCSV()");
+        }
     }
 
     /**
@@ -233,19 +248,24 @@ public class ClosetArchiver {
      * @param l  A line from the file
      * @return   A new Dress
      */
-    private static Dress dressFromCSV(String[] l) {
+    private static Dress dressFromCSV(String[] l) throws MissingDataException {
         Instant lastUsed = null;
         if (!l[6].equals("null"))
             lastUsed = Instant.parse(l[6]);
 
-        return new Dress(parseInt(l[0]), Instant.parse(l[2]), parseInt(l[3]), parseInt(l[4]),
-                Clean.valueOf(l[5].toUpperCase()), lastUsed, Material.valueOf(l[7].toUpperCase()),
-                Textile.valueOf(l[8].toUpperCase()), Color.valueOf(l[9].toUpperCase()),
-                Warmth.valueOf(l[10].toUpperCase()), Fastener.valueOf(l[11].toUpperCase()),
-                parseInt(l[12]), l[13], Length.valueOf(l[14].toUpperCase()),
-                Function.valueOf(l[15].toUpperCase()), Length.valueOf(l[16].toUpperCase()),
-                Neckline.valueOf(l[17].toUpperCase()), Volume.valueOf(l[18].toUpperCase()),
-                bool(l[20]));
+        try {
+            return new Dress(parseInt(l[0]), Instant.parse(l[2]), parseInt(l[3]), parseInt(l[4]),
+                    Clean.valueOf(l[5].toUpperCase()), lastUsed, Material.valueOf(l[7].toUpperCase()),
+                    Textile.valueOf(l[8].toUpperCase()), Color.valueOf(l[9].toUpperCase()),
+                    Warmth.valueOf(l[10].toUpperCase()), Fastener.valueOf(l[11].toUpperCase()),
+                    parseInt(l[12]), l[13], Length.valueOf(l[14].toUpperCase()),
+                    Function.valueOf(l[15].toUpperCase()), Length.valueOf(l[16].toUpperCase()),
+                    Neckline.valueOf(l[17].toUpperCase()), Volume.valueOf(l[18].toUpperCase()),
+                    bool(l[20]));
+        }
+        catch (IllegalArgumentException e) {
+            throw new MissingDataException("Some data was missing in dressFromCSV()");
+        }
     }
 
     /**
@@ -253,7 +273,7 @@ public class ClosetArchiver {
      * @param line      a line from the CSV
      * @param closet    a Closet instance
      */
-    private static void addLine(String[] line, Closet closet) {
+    private static void addLine(String[] line, Closet closet) throws MissingDataException {
         int ID = Integer.parseInt(line[0]);
         String type = line[1];
 
@@ -297,8 +317,8 @@ public class ClosetArchiver {
         catch (FileNotFoundException e) {
             System.out.println("Exception in ClosetArchiver: " + e);
         }
-        catch (IllegalArgumentException e) {
-            System.out.println("Exception in ClosetArchiver: Some class was missing data.");
+        catch (MissingDataException e) {
+            System.out.println("Exception in ClosetArchiver.addLine(): " + e);
         }
 
         int count = Objects.requireNonNull(new File("archive/").listFiles()).length;

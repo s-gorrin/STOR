@@ -1,6 +1,7 @@
 package closet;
 
 import clothing.Pants;
+import clothing.Top;
 import clothing.trait.*;
 import org.junit.Assert;
 import org.junit.Test;
@@ -58,5 +59,11 @@ public class ClosetArchiverTest {
         Assert.assertEquals(savedCloset.get(0).getTextile(), Textile.TWILL);
         Assert.assertEquals(savedCloset.get(0).getTotalUses(), 2);
         Assert.assertEquals(savedCloset.get(0).getAdded(), closet.get(0).getAdded());
+
+        closet.add(new Top());
+        ClosetArchiver.save(closet);
+
+        Closet badSave = ClosetArchiver.retrieve();
+        Assert.assertFalse(badSave.contains(1)); // the new Top was not in the retrieved closet due to MissingData
     }
 }
