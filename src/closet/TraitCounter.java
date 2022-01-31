@@ -17,12 +17,6 @@ public class TraitCounter<E extends Enum<E>> extends HashMap<Integer, E> {
         super();
     }
 
-    public TraitCounter(Closet closet) {
-        super();
-
-
-    }
-
     /**
      * Count instances of a specific trait in the container
      * @param trait The thing being counted

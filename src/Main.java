@@ -1,5 +1,6 @@
 import closet.Closet;
 import closet.ClosetArchiver;
+import closet.TraitCounter;
 import clothing.*;
 import clothing.trait.*;
 import org.junit.Assert;
@@ -85,7 +86,19 @@ public class Main {
             }
         }
 
+        // Example of TraitCounter in use
+        TraitCounter<Color> colorCounter= new TraitCounter<>();
 
+        for (int ID : closet.getAll())
+            colorCounter.put(ID, closet.get(ID).getColor());
+
+        System.out.println("Most common color in closet (first if tied): " +
+            Color.values()[colorCounter.mostCommon()].toString().toLowerCase());
+        System.out.println("Are more than half the clothes black: " + colorCounter.moreThanHalf(Color.BLACK));
+        System.out.println("How many are gray: " + colorCounter.countAttribute(Color.GRAY));
+
+/*
+        // commenting out archiver code to save dealing with archives
         if (!ClosetArchiver.save(closet))
             System.out.println("Closet failed to save.");
 
@@ -94,6 +107,7 @@ public class Main {
         // if this passes, it means the item in savedCloset is the same as the item in closet :)
         Assert.assertEquals(closet.get(2).getAdded(), savedCloset.get(2).getAdded());
         System.out.println("Success");
+ */
 
 
     }
