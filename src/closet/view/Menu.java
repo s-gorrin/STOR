@@ -8,9 +8,6 @@ import java.util.Scanner;
  */
 public abstract class Menu {
     private static final int FIRST = 1;
-    int LAST;
-
-    String menu;
 
     /**
      * handle user input for menu selection

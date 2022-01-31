@@ -1,8 +1,5 @@
 package closet.view;
 
-import java.util.InputMismatchException;
-import java.util.Scanner;
-
 /**
  * The main menu view of the closet application
  */
