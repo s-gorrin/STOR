@@ -25,8 +25,14 @@ public class Top extends Clothing {
         super();
     }
 
+    /**
+     * A constructor with passed-in child class attributes but no parent attributes
+     * @param length    Child attribute: hem length
+     * @param function  Child attribute: function
+     * @param sleeves   Child attribute: sleeve length
+     * @param neck      Child attribute: neck type
+     */
     public Top(Length length, Function function, Length sleeves, Neckline neck) {
-        // constructor with passed-in child class attributes but no parent attributes
         super();
 
         this.sleeves = sleeves;
@@ -35,9 +41,21 @@ public class Top extends Clothing {
         this.function = function;
     }
 
+    /**
+     * A constructor with all passed-in values
+     * @param material              What material it is made of
+     * @param textile               How it is constructed
+     * @param color                 What the primary color is
+     * @param warmth                How warm it is to wear
+     * @param fastener              How it is fastened
+     * @param usesPerCleanLevel     How many uses before it changes cleanliness rating
+     * @param length                Child attribute: hem length
+     * @param function              Child attribute: function
+     * @param sleeves               Child attribute: sleeve length
+     * @param neck                  Child attribute: neck type
+     */
     public Top(Material material, Textile textile, Color color, Warmth warmth, Fastener fastener,
                int usesPerCleanLevel, Length length, Function function, Length sleeves, Neckline neck) {
-        // constructor with everything passed-in
         super(material, textile, color, warmth, fastener, usesPerCleanLevel);
 
         this.sleeves = sleeves;

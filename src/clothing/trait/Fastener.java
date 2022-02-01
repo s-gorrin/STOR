@@ -1,8 +1,12 @@
+/**
+ * Name: Seth Gorrin
+ * Class: CS-622
+ * Date: 2/01/2022
+ * Desc: Possible clothing fastener types
+ */
+
 package clothing.trait;
 
-/**
- * Possible clothing fastener types
- */
 public enum Fastener {
     BUTTON,
     ZIPPER,
@@ -11,6 +15,11 @@ public enum Fastener {
     ELASTIC,
     OTHER,
     NONE;
+
+    public static final int size;
+    static {
+        size = values().length;
+    }
 
     /**
      * A descriptive phrase for each fastener type
@@ -45,6 +54,8 @@ public enum Fastener {
         StringBuilder list = new StringBuilder();
         int i = 1;
 
+        list.append("fasteners:\n");
+
         for (Fastener name : values()) {
             list.append(i++).append(". ").append(name.toString().toLowerCase()).append("\n");
         }
@@ -60,6 +71,6 @@ public enum Fastener {
      * @return  the Clean item
      */
     public static Fastener get(int i) throws ArrayIndexOutOfBoundsException {
-        return values()[i-1];
+        return values()[i];
     }
 }

@@ -1,14 +1,23 @@
+/**
+ * Name: Seth Gorrin
+ * Class: CS-622
+ * Date: 2/01/2022
+ * Desc: Measures of how warm an item can be, as in, how warm it will make the wearer
+ */
+
 package clothing.trait;
 
-/**
- * Measures of how warm an item can be, as in, how warm it will make the wearer
- */
 public enum Warmth {
     HOT,
     WARM,
     NEUTRAL,
     COOL,
     COLD;
+
+    public static final int size;
+    static {
+        size = values().length;
+    }
 
     /**
      * Format a numbered list of enum items for printing
@@ -17,6 +26,8 @@ public enum Warmth {
     public static String list() {
         StringBuilder list = new StringBuilder();
         int i = 1;
+
+        list.append("warmth options:\n");
 
         for (Warmth name : values()) {
             list.append(i++).append(". ").append(name.toString().toLowerCase()).append("\n");
@@ -33,6 +44,6 @@ public enum Warmth {
      * @return  the Clean item
      */
     public static Warmth get(int i) throws ArrayIndexOutOfBoundsException {
-        return values()[i-1];
+        return values()[i];
     }
 }

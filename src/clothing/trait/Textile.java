@@ -1,8 +1,12 @@
+/**
+ * Name: Seth Gorrin
+ * Class: CS-622
+ * Date: 2/01/2022
+ * Desc: Possible clothing fabric types
+ */
+
 package clothing.trait;
 
-/**
- * Possible clothing fabric types
- */
 public enum Textile {
     BASIC_WEAVE,
     TWILL,
@@ -11,6 +15,11 @@ public enum Textile {
     FELT,
     OTHER;
 
+    public static final int size;
+    static {
+        size = values().length;
+    }
+
     /**
      * Format a numbered list of enum items for printing
      * @return a numbered String representation of the enum
@@ -18,6 +27,8 @@ public enum Textile {
     public static String list() {
         StringBuilder list = new StringBuilder();
         int i = 1;
+
+        list.append("textiles:\n");
 
         for (Textile name : values()) {
             list.append(i++).append(". ").append(
@@ -35,6 +46,6 @@ public enum Textile {
      * @return  the Clean item
      */
     public static Textile get(int i) throws ArrayIndexOutOfBoundsException {
-        return values()[i-1];
+        return values()[i];
     }
 }

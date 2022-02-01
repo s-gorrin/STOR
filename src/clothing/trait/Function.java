@@ -1,14 +1,23 @@
+/**
+ * Name: Seth Gorrin
+ * Class: CS-622
+ * Date: 2/01/2022
+ * Desc: Categories for the main use of a clothing item
+ */
+
 package clothing.trait;
 
-/**
- * Categories for the main use of a clothing item
- */
 public enum Function {
     COMFORTABLE,
     CASUAL,
     ATHLETIC,
     WORK,
     FORMAL;
+
+    public static final int size;
+    static {
+        size = values().length;
+    }
 
     /**
      * Format a numbered list of enum items for printing
@@ -17,6 +26,8 @@ public enum Function {
     public static String list() {
         StringBuilder list = new StringBuilder();
         int i = 1;
+
+        list.append("functions:\n");
 
         for (Function name : values()) {
             list.append(i++).append(". ").append(name.toString().toLowerCase()).append("\n");
@@ -33,6 +44,6 @@ public enum Function {
      * @return  the Clean item
      */
     public static Function get(int i) throws ArrayIndexOutOfBoundsException {
-        return values()[i-1];
+        return values()[i];
     }
 }

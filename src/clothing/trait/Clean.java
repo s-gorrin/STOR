@@ -1,13 +1,22 @@
+/**
+ * Name: Seth Gorrin
+ * Class: CS-622
+ * Date: 2/01/2022
+ * Desc: Levels of dirtiness for a clothing item
+ */
+
 package clothing.trait;
 
-/**
- * Levels of dirtiness for a clothing item
- */
 public enum Clean {
     FRESH,
     OKAY,
     PASSABLE,
     WASH;
+
+    public static final int size;
+    static {
+        size = values().length;
+    }
 
     /**
      * Format a numbered list of enum items for printing
@@ -16,6 +25,8 @@ public enum Clean {
     public static String list() {
         StringBuilder list = new StringBuilder();
         int i = 1;
+
+        list.append("clean options:\n");
 
         for (Clean name : values()) {
             list.append(i++).append(". ").append(name.toString().toLowerCase()).append("\n");
@@ -32,6 +43,6 @@ public enum Clean {
      * @return  the Clean item
      */
     public static Clean get(int i) throws ArrayIndexOutOfBoundsException {
-        return values()[i-1];
+        return values()[i];
     }
 }

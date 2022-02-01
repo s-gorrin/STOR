@@ -1,8 +1,12 @@
+/**
+ * Name: Seth Gorrin
+ * Class: CS-622
+ * Date: 2/01/2022
+ * Desc: Possible clothing materials
+ */
+
 package clothing.trait;
 
-/**
- * Possible clothing materials
- */
 public enum Material {
     COTTON,
     LINEN,
@@ -14,6 +18,11 @@ public enum Material {
     NYLON,
     OTHER;
 
+    public static final int size;
+    static {
+        size = values().length;
+    }
+
     /**
      * Format a numbered list of enum items for printing
      * @return a numbered String representation of the enum
@@ -21,6 +30,8 @@ public enum Material {
     public static String list() {
         StringBuilder list = new StringBuilder();
         int i = 1;
+
+        list.append("materials:\n");
 
         for (Material name : values()) {
             list.append(i++).append(". ").append(name.toString().toLowerCase()).append("\n");
@@ -37,6 +48,6 @@ public enum Material {
      * @return  the Clean item
      */
     public static Material get(int i) throws ArrayIndexOutOfBoundsException {
-        return values()[i-1];
+        return values()[i];
     }
 }

@@ -1,11 +1,16 @@
+/**
+ * Name: Seth Gorrin
+ * Class: CS-622
+ * Date: 2/01/2022
+ * Desc: A neckline property for things with necklines
+ */
+
 package clothing.trait;
 
-/**
- * A neckline property for things with necklines
- */
 public enum Neckline {
     CREW,
     V,
+    TURTLE,
     POLO,
     HENLEY,
     SCOOP,
@@ -14,6 +19,11 @@ public enum Neckline {
     OFF_SHOULDER,
     COLLAR;
 
+    public static final int size;
+    static {
+        size = values().length;
+    }
+
     /**
      * Format a numbered list of enum items for printing
      * @return a numbered String representation of the enum
@@ -21,6 +31,8 @@ public enum Neckline {
     public static String list() {
         StringBuilder list = new StringBuilder();
         int i = 1;
+
+        list.append("neckline options:\n");
 
         for (Neckline name : values()) {
             list.append(i++).append(". ").append(
@@ -38,6 +50,6 @@ public enum Neckline {
      * @return  the Clean item
      */
     public static Neckline get(int i) throws ArrayIndexOutOfBoundsException {
-        return values()[i-1];
+        return values()[i];
     }
 }

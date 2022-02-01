@@ -1,8 +1,12 @@
+/**
+ * Name: Seth Gorrin
+ * Class: CS-622
+ * Date: 2/01/2022
+ * Desc: A length scale for various clothing properties
+ */
+
 package clothing.trait;
 
-/**
- * A length scale for various clothing properties
- */
 public enum Length {
     NONE,
     VERY_SHORT,
@@ -12,6 +16,11 @@ public enum Length {
     MID_LONG,
     LONG;
 
+    public static final int size;
+    static {
+        size = values().length;
+    }
+
     /**
      * Format a numbered list of enum items for printing
      * @return a numbered String representation of the enum
@@ -19,6 +28,8 @@ public enum Length {
     public static String list() {
         StringBuilder list = new StringBuilder();
         int i = 1;
+
+        list.append("lengths:\n");
 
         for (Length name : values()) {
             list.append(i++).append(". ").append(
@@ -36,6 +47,6 @@ public enum Length {
      * @return  the Clean item
      */
     public static Length get(int i) throws ArrayIndexOutOfBoundsException {
-        return values()[i-1];
+        return values()[i];
     }
 }

@@ -1,8 +1,12 @@
+/**
+ * Name: Seth Gorrin
+ * Class: CS-622
+ * Date: 2/01/2022
+ * Desc: Possible clothing colors and a generalized compatibility checker
+ */
+
 package clothing.trait;
 
-/**
- * Possible clothing colors and a generalized compatibility checker
- */
 public enum Color {
     BLACK,
     GRAY,
@@ -16,6 +20,11 @@ public enum Color {
     PURPLE,
     PATTERN,
     OTHER;
+
+    public static final int size;
+    static {
+        size = values().length;
+    }
 
     /**
      * A static function to determine if two clothing colors are compatible
@@ -56,6 +65,8 @@ public enum Color {
         StringBuilder list = new StringBuilder();
         int i = 1;
 
+        list.append("colors:\n");
+
         for (Color name : values()) {
             list.append(i++).append(". ").append(name.toString().toLowerCase()).append("\n");
         }
@@ -71,6 +82,6 @@ public enum Color {
      * @return  the Clean item
      */
     public static Color get(int i) throws ArrayIndexOutOfBoundsException {
-        return values()[i-1];
+        return values()[i];
     }
 }

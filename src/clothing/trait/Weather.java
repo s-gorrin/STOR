@@ -1,8 +1,13 @@
+/**
+ * Name: Seth Gorrin
+ * Class: CS-622
+ * Date: 2/01/2022
+ * Desc: Weather types
+ *      more may be added later, or this may be replaced with a weather API
+ */
+
 package clothing.trait;
 
-/**
- * Weather types - more may be added later, or this may be replaced with a weather API
- */
 public enum Weather {
     WARM_SUN,
     COLD_SUN,
@@ -11,6 +16,11 @@ public enum Weather {
     NIGHT,
     OTHER;
 
+    public static final int size;
+    static {
+        size = values().length;
+    }
+
     /**
      * Format a numbered list of enum items for printing
      * @return a numbered String representation of the enum
@@ -18,6 +28,8 @@ public enum Weather {
     public static String list() {
         StringBuilder list = new StringBuilder();
         int i = 1;
+
+        list.append("weather options:\n");
 
         for (Weather name : values()) {
             list.append(i++).append(". ").append(name.toString().toLowerCase()).append("\n");
@@ -34,6 +46,6 @@ public enum Weather {
      * @return  the Clean item
      */
     public static Weather get(int i) throws ArrayIndexOutOfBoundsException {
-        return values()[i-1];
+        return values()[i];
     }
 }
