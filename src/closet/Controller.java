@@ -7,6 +7,7 @@
 
 package closet;
 
+import closet.view.AddClothing;
 import closet.view.MainMenu;
 import closet.view.ManageClosetMenu;
 
@@ -109,7 +110,7 @@ public class Controller {
 
         switch (response) {
             case ADD:
-                System.out.println("add an item coming soon");
+                AddClothing.landing(this, closet);
                 break;
             case REMOVE:
                 System.out.println("remove an item coming soon");
@@ -120,5 +121,11 @@ public class Controller {
             case BACK:
                 start();
         }
+    }
+
+    public static void main(String[] args) {
+        Controller controller = new Controller();
+
+        controller.start();
     }
 }

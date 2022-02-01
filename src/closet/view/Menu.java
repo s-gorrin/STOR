@@ -10,12 +10,13 @@ package closet.view;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public abstract class Menu {
+public class Menu {
     private static final int FIRST = 1;
 
     /**
      * handle user input for menu selection
      * accepting only responses by number for simplicity
+     * [note: with a gui, this method would be replaced by clickable buttons of some kind]
      * @param menu  a string containing the options for the calling menu
      * @param last  the number of the last item in the menu
      * @return      the real index of the selected item
@@ -41,11 +42,12 @@ public abstract class Menu {
                 response = 0;
             }
             finally {
-                keyboard.nextLine(); // clear buffer to get next input
+                if (keyboard.hasNextLine())
+                    keyboard.nextLine(); // clear buffer to get next input
             }
         }
 
-        keyboard.close();
+        // in a finished command line app, there would be a clear console here
 
         return response - 1;
     }
