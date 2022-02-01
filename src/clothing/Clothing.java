@@ -1,3 +1,10 @@
+/**
+ * Name: Seth Gorrin
+ * Class: CS-622
+ * Date: 1/31/2022
+ * Desc: Abstract Clothing class which implements the Sewable and Trackable interfaces
+ */
+
 package clothing;
 
 import clothing.trait.*;
@@ -5,11 +12,6 @@ import clothing.trait.*;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 
-/**
- * An abstract clothing class
- * It implements Sewable for most of its descriptive aspects,
- * and Trackable for most of its usage tracking.
- */
 public abstract class Clothing implements Sewable, Trackable {
 
     // Sewable interface

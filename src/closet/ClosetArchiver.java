@@ -1,5 +1,11 @@
-package closet;
+/**
+ * Name: Seth Gorrin
+ * Class: CS-622
+ * Date: 1/31/2022
+ * Desc: A class to store and retrieve Closet data to and from a CSV file
+ */
 
+package closet;
 
 import clothing.*;
 import clothing.trait.*;
@@ -13,9 +19,6 @@ import java.util.Scanner;
 
 import static java.lang.Integer.parseInt;
 
-/**
- * A class to store and retrieve Closet data to and from a CSV file
- */
 public class ClosetArchiver {
     public static final String FILENAME = "archive/closet.csv";
 

@@ -1,3 +1,10 @@
+/**
+ * Name: Seth Gorrin
+ * Class: CS-622
+ * Date: 1/31/2022
+ * Desc: A container class for clothing to handle storage and recall of items
+ */
+
 package closet;
 
 import clothing.Clothing;
@@ -6,9 +13,6 @@ import clothing.trait.Type;
 import java.util.HashMap;
 import java.util.Set;
 
-/**
- * A container class for clothing to handle storage and recall of items
- */
 public class Closet {
     // This is a HashMap because the ID is used in several places,
     // which means the ID cannot be an index, or removals would be very complicated

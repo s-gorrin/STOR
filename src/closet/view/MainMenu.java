@@ -1,8 +1,12 @@
+/**
+ * Name: Seth Gorrin
+ * Class: CS-622
+ * Date: 1/31/2022
+ * Desc: The main menu of the application
+ */
+
 package closet.view;
 
-/**
- * The main menu view of the closet application
- */
 public class MainMenu extends Menu {
     // Note: this must be changed if menu options are added or removed
     private static final int LAST = 3;

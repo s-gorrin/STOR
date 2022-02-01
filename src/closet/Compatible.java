@@ -1,3 +1,10 @@
+/**
+ * Name: Seth Gorrin
+ * Class: CS-622
+ * Date: 1/31/2022
+ * Desc: A class to track compatibility of Clothing items, by ID
+ */
+
 package closet;
 
 import java.io.File;
@@ -7,10 +14,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Scanner;
 
-/**
- * A class to track compatibility of Clothing items, by ID
- * (so they don't have to do it themselves)
- */
 public class Compatible {
     public static final String FILENAME = "comp.csv";
 

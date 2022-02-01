@@ -1,10 +1,16 @@
+/**
+ * Name: Seth Gorrin
+ * Class: CS-622
+ * Date: 1/31/2022
+ * Desc: An interface to define a trackable item
+ */
+
 package clothing;
 
 import clothing.trait.Clean;
 
 import java.time.Instant;
 
-// An interface to define a trackable item
 public interface Trackable {
     int totalUses = 0;
     int usesSinceCleaned = 0;

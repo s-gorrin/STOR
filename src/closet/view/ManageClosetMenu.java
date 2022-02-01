@@ -1,8 +1,12 @@
+/**
+ * Name: Seth Gorrin
+ * Class: CS-622
+ * Date: 1/31/2022
+ * Desc: The menu for the manage closet option from the main menu
+ */
+
 package closet.view;
 
-/**
- * The menu for the manage closet option from the main menu
- */
 public class ManageClosetMenu extends Menu {
     // Note: this must be changed if menu options are added or removed
     private static final int LAST = 4;

@@ -1,11 +1,15 @@
+/**
+ * Name: Seth Gorrin
+ * Class: CS-622
+ * Date: 1/31/2022
+ * Desc: Define a menu for the STOR application and handle the menu user input
+ */
+
 package closet.view;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-/**
- * Define a menu for the STOR application
- */
 public abstract class Menu {
     private static final int FIRST = 1;
 

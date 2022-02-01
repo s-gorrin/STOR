@@ -1,8 +1,14 @@
+/**
+ * Name: Seth Gorrin
+ * Class: CS-622
+ * Date: 1/31/2022
+ * Desc: The primary controller for the STOR application - structure may change
+ */
+
 package closet;
 
 import closet.view.MainMenu;
 import closet.view.ManageClosetMenu;
-import closet.view.Menu;
 
 import java.io.File;
 import java.io.IOException;

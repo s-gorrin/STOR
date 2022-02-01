@@ -1,3 +1,10 @@
+/**
+ * Name: Seth Gorrin
+ * Class: CS-622
+ * Date: 1/31/2022
+ * Desc: A class to define an article of clothing that covers the top half of the body
+ */
+
 package clothing;
 
 import clothing.trait.*;
@@ -5,9 +12,6 @@ import clothing.trait.*;
 import java.time.Instant;
 import java.util.Objects;
 
-/**
- * A class to define an article of clothing that covers the top half of the body
- */
 public class Top extends Clothing {
 
     private Length sleeves;

@@ -1,15 +1,19 @@
+/**
+ * Name: Seth Gorrin
+ * Class: CS-622
+ * Date: 1/31/2022
+ * Desc: A generic container class to count and catalogue instances of traits in the Closet
+ * This can be used to get a variety of information about a specific trait,
+ * and is therefor likely to be generally useful
+ * @param <E>       The thing being collected
+ */
+
 package closet;
 
 import clothing.trait.Color;
 
 import java.util.*;
 
-/**
- * A generic container class to count and catalogue instances of traits in the Closet
- * This can be used to get a variety of information about a specific trait,
- * and is therefor likely to be generally useful
- * @param <E>       The thing being collected
- */
 public class TraitCounter<E extends Enum<E>> extends HashMap<Integer, E> {
     private static final int CAPACITY = 20; // the size of the longest trait enum plus a few to be safe
 
@@ -98,9 +102,14 @@ public class TraitCounter<E extends Enum<E>> extends HashMap<Integer, E> {
         counter.put(3, Color.BLACK);
         counter.put(4, Color.BLACK);
         counter.put(5, Color.BLACK);
+        counter.put(6, Color.GREEN);
 
-        System.out.println(counter.countAttribute(Color.BLACK));
-        System.out.println(Color.values()[counter.mostCommon()]);
+        System.out.println("Number of black clothes: " + counter.countAttribute(Color.BLACK));
+        System.out.println("Most common color: " + Color.values()[counter.mostCommon()].toString().toLowerCase());
+        System.out.print("IDs with the value green: ");
+        for (int ID : counter.IDsWithTrait(Color.GREEN))
+            System.out.print(ID + " ");
+        System.out.println();
     }
 
 }

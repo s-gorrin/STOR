@@ -1,3 +1,10 @@
+/**
+ * Name: Seth Gorrin
+ * Class: CS-622
+ * Date: 1/31/2022
+ * Desc: A class to define an article of clothing which covers legs individually
+ */
+
 package clothing;
 
 import clothing.trait.*;
@@ -6,7 +13,6 @@ import java.time.Instant;
 import java.util.Objects;
 
 public class Pants extends Clothing {
-    // A class to define an article of clothing which covers legs individually
 
     public static final Type type = Type.PANTS;
 
