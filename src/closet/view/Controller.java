@@ -5,11 +5,11 @@
  * Desc: The primary controller for the STOR application - structure may change
  */
 
-package closet;
+package closet.view;
 
-import closet.view.AddClothing;
-import closet.view.MainMenu;
-import closet.view.ManageClosetMenu;
+import closet.Closet;
+import closet.ClosetArchiver;
+import closet.Compatible;
 
 import java.io.File;
 import java.io.IOException;
@@ -110,7 +110,7 @@ public class Controller {
 
         switch (response) {
             case ADD:
-                AddClothing.landing(this, closet);
+                AddClothing.landing(this, closet, compatible);
                 break;
             case REMOVE:
                 System.out.println("remove an item coming soon");

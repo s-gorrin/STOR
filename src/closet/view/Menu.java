@@ -21,7 +21,7 @@ public class Menu {
      * @param last  the number of the last item in the menu
      * @return      the real index of the selected item
      */
-    static int prompt(String menu, int last) {
+    public static int prompt(String menu, int last) {
         Scanner keyboard = new Scanner(System.in);
         int response = 0;
 
@@ -50,6 +50,17 @@ public class Menu {
         // in a finished command line app, there would be a clear console here
 
         return response - 1;
+    }
+
+
+    public static boolean bool(String message) {
+        Scanner keyboard = new Scanner(System.in);
+        String instructions = "\nPlease enter y or yes for yes, anything else for no: ";
+
+        System.out.print(message + instructions);
+        String response = keyboard.next().toLowerCase();
+
+        return response.equals("y") || response.equals("yes") || response.equals("1");
     }
 
 }
