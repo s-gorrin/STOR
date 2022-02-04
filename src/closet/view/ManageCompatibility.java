@@ -20,7 +20,7 @@ public class ManageCompatibility {
      * @param compatible    The compatibility record
      */
     public static void add(Clothing item, Closet closet, Compatible compatible) {
-        for (int ID : closet.getAll())
+        for (int ID : closet.getAllIDs())
             if (item.possiblyCompatible(closet.get(ID)) && ID != item.getID())
                 if (Menu.bool("Is " + item.getName() + " compatible with " + closet.get(ID).getName() + "?"))
                     compatible.add(item.getID(), ID);

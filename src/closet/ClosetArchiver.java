@@ -125,9 +125,8 @@ public class ClosetArchiver {
     /**
      * Take a Closet object and store it as a CSV file
      * @param closet    an instance of the Closet class
-     * @return          true on success, false on failure
      */
-    public static boolean save(Closet closet) {
+    public static void save(Closet closet) {
         File archive = new File(FILENAME);
         FileWriter writer;
 
@@ -136,7 +135,7 @@ public class ClosetArchiver {
             writer.write("ID, type, added, totalUses, usesSinceCleaned, cleanLevel, lastUsed, " +
                     "material, textile, color, warmth, fastener, usesPerCleanLevel, detail, length, " +
                     "function, sleeves, neck, volume, waist, pockets, beltLoops\n"); // CSV header
-            for (int ID : closet.getAll()) {
+            for (int ID : closet.getAllIDs()) {
                 switch (closet.get(ID).getType()) {
                     case TOP:
                         writeTop(writer, ((Top)closet.get(ID)));
@@ -159,10 +158,8 @@ public class ClosetArchiver {
         }
         catch (IOException e) {
             System.out.println("Exception in ClosetArchiver: " + e);
-            return false;
         }
 
-        return true;
     }
 
     /**

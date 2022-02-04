@@ -10,6 +10,7 @@ package closet;
 import clothing.Clothing;
 import clothing.trait.Type;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -113,7 +114,15 @@ public class Closet {
      * POST-CONDITION: a Set of all items in the closet is returned
      * @return  the set of all items
      */
-    public Set<Integer> getAll() {
+    public Set<Integer> getAllIDs() {
         return closet.keySet();
+    }
+
+    /**
+     * get all items in closet
+     * @return  a Collection of all values in the HashMap
+     */
+    public Collection<Clothing> getAllClothing() {
+        return closet.values();
     }
 }

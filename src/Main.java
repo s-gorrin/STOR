@@ -1,9 +1,7 @@
 import closet.Closet;
-import closet.ClosetArchiver;
 import closet.TraitCounter;
 import clothing.*;
 import clothing.trait.*;
-import org.junit.Assert;
 
 
 public class Main {
@@ -24,7 +22,7 @@ public class Main {
         for (int i = 0; i < 2; i++)
             closet.add(new Skirt());
 
-        for (int ID : closet.getAll()) {
+        for (int ID : closet.getAllIDs()) {
             // fill all attributes with semi-random values based on ID as a number
             closet.get(ID).setColor(Color.get(ID % Color.values().length + 1));
             closet.get(ID).setTextile(Textile.get(ID % Textile.values().length + 1));
@@ -77,7 +75,7 @@ public class Main {
         Closet closet = new Closet();
         fillCloset(closet);
 
-        for (int ID : closet.getAll()) {
+        for (int ID : closet.getAllIDs()) {
             // print the closet
             try {
                 System.out.println(closet.get(ID).getID() + ":" + closet.get(ID).getName());
@@ -89,7 +87,7 @@ public class Main {
         // Example of TraitCounter in use
         TraitCounter<Color> colorCounter= new TraitCounter<>();
 
-        for (int ID : closet.getAll())
+        for (int ID : closet.getAllIDs())
             colorCounter.put(ID, closet.get(ID).getColor());
 
         System.out.println("Most common color in closet (first if tied): " +

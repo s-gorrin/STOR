@@ -26,7 +26,7 @@ public class ClosetTest {
         for (int i = 0; i < 2; i++)
             closet.add(new Skirt());
 
-        for (int ID : closet.getAll()) {
+        for (int ID : closet.getAllIDs()) {
             // fill all attributes with semi-random values based on ID as a number
             closet.get(ID).setColor(Color.get(ID % Color.size));
             closet.get(ID).setTextile(Textile.get(ID % Textile.size));
