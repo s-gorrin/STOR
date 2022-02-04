@@ -17,7 +17,7 @@ public class FastenerTest {
     @Test
     public void list() {
         Assert.assertEquals(Fastener.list(),
-                "1. button\n" +
+                "fasteners:\n" + "1. button\n" +
                 "2. zipper\n" +
                 "3. drawstring\n" +
                 "4. snap\n" +

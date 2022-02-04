@@ -28,10 +28,10 @@ public class MainMenu extends Menu {
      * @return  a response from the main menu options
      */
     public static String prompt() {
-        return Response.values()[prompt(MENU, LAST)].toString();
+        return Response.values()[Menu.prompt(MENU, LAST)].toString();
     }
 
     public static void main(String[] args) {
-        System.out.println(prompt());
+        System.out.println(MainMenu.prompt());
     }
 }

@@ -24,7 +24,7 @@ public class ColorTest {
 
     @Test (expected = ArrayIndexOutOfBoundsException.class)
     public void get() {
-        Assert.assertEquals(Color.get(1), Color.BLACK);
+        Assert.assertEquals(Color.get(0), Color.BLACK);
         Color test = Color.get(56);
         Assert.assertNull(test);
     }
