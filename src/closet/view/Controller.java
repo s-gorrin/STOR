@@ -8,10 +8,11 @@
 package closet.view;
 
 import closet.Closet;
-import closet.ClosetArchiver;
+import closet.ClosetSerializer;
 import closet.Compatible;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 // TODO: refactor this to HomeController, make Manage and Outfit controllers their own classes
@@ -51,17 +52,18 @@ public class Controller {
      * Constructor to load a closet file or create a new closet and start program execution
      */
     public Controller() {
-        File closetFile = new File(ClosetArchiver.FILENAME);
+        File closetFile = new File(ClosetSerializer.FILENAME);
+        closet = new Closet();
         compatible = new Compatible();
 
-        if (closetFile.exists())
-            closet = ClosetArchiver.retrieve();
-        else
-            closet = new Closet();
-
-        try {
-            compatible.readFromFile();
+        if (closetFile.exists()) {
+            try { ClosetSerializer.readJSON(closet); }
+            catch (FileNotFoundException e) {
+                System.out.println("Closet JSON file not found somehow: " + e);
+            }
         }
+
+        try { compatible.readFromFile(); }
         catch (IOException e) {
             System.out.println("Problem reading compatibility file: " + e);
         }
@@ -90,16 +92,18 @@ public class Controller {
      * Safe exit handler for the application
      */
     public void exit() {
-        ClosetArchiver.save(closet);
-        try {
-            compatible.writeToFile();
+        try { ClosetSerializer.writeJSON(closet); }
+        catch (IOException e) {
+            System.out.println("There was a problem writing JSON: " + e);
         }
+
+        try { compatible.writeToFile(); }
         catch (IOException e) {
             System.out.println("There was a problem saving the compatibility table: " + e);
         }
 
         System.out.println("Goodbye");
-        System.exit(0); // should this be an "exit success" or something?
+        System.exit(0);
     }
 
     /**

@@ -8,13 +8,10 @@
 package clothing.trait;
 
 public enum Type {
-    CLOTHING,
     TOP,
     PANTS,
     SKIRT,
-    DRESS,
-    COAT,
-    ACCESSORY;
+    DRESS;
 
     public static final int size;
     static {

@@ -29,7 +29,7 @@ public class ClosetSerializer {
      * @param closet        the closet being written
      * @throws IOException  file writing exception
      */
-    private static void writeJSON(Closet closet) throws IOException {
+    public static void writeJSON(Closet closet) throws IOException {
         Gson gson = new GsonBuilder().create();
 
         FileWriter writer = new FileWriter(FILENAME);
@@ -43,7 +43,7 @@ public class ClosetSerializer {
      * @param closet                    a closet to fill with Clothing from JSON
      * @throws FileNotFoundException    exception from file reading
      */
-    private static void readJSON(Closet closet) throws FileNotFoundException {
+    public static void readJSON(Closet closet) throws FileNotFoundException {
         Gson gson = new GsonBuilder().create();
 
         try (JsonReader reader = new JsonReader(new FileReader(FILENAME))) {

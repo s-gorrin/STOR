@@ -10,7 +10,7 @@ package clothing;
 import clothing.trait.*;
 
 public class SerialClothing extends Clothing {
-    private Type type = Type.CLOTHING;
+    private Type type = Type.TOP;
     private Length length = Length.NONE;
     private Function function = Function.COMFORTABLE;
     private Length sleeves = Length.NONE;
