@@ -15,6 +15,7 @@ import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
@@ -24,7 +25,7 @@ import java.io.IOException;
 public class FXController extends Application {
     public static final int PADDING = 5;
     public static final int WIDTH = 300;
-    public static final int HEIGHT = 500;
+    public static final int HEIGHT = 500; // reset to 500
 
     protected static final Closet closet = new Closet();
     protected static final Compatible compatible = new Compatible();
@@ -76,7 +77,11 @@ public class FXController extends Application {
 
         outfitMenu.getChildren().addAll(home(primaryStage), exit());
         outfitMenu.setAlignment(Pos.CENTER);
-        primaryStage.setScene(new Scene(outfitMenu, WIDTH, HEIGHT));
+
+        ScrollPane sp = new ScrollPane(outfitMenu);
+        sp.setFitToWidth(true);
+        sp.setFitToHeight(true);
+        primaryStage.setScene(new Scene(sp, WIDTH, HEIGHT));
         primaryStage.show();
     }
 
@@ -92,7 +97,11 @@ public class FXController extends Application {
 
         manageMenu.getChildren().addAll(add, home(primaryStage), exit());
         manageMenu.setAlignment(Pos.CENTER);
-        primaryStage.setScene(new Scene(manageMenu, WIDTH, HEIGHT));
+
+        ScrollPane sp = new ScrollPane(manageMenu);
+        sp.setFitToWidth(true);
+        sp.setFitToHeight(true);
+        primaryStage.setScene(new Scene(sp, WIDTH, HEIGHT));
         primaryStage.show();
     }
 
@@ -113,7 +122,10 @@ public class FXController extends Application {
         vbox.getChildren().addAll(outfit, manage, exit());
         vbox.setAlignment(Pos.CENTER);
 
-        primaryStage.setScene(new Scene(vbox, WIDTH, HEIGHT));
+        ScrollPane sp = new ScrollPane(vbox);
+        sp.setFitToWidth(true);
+        sp.setFitToHeight(true);
+        primaryStage.setScene(new Scene(sp, WIDTH, HEIGHT));
         primaryStage.show();
     }
 

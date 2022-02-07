@@ -10,6 +10,7 @@ package closet.view;
 import clothing.trait.Trait;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -84,7 +85,11 @@ public class FXTraitScenes {
 
         vbox.setAlignment(Pos.CENTER);
 
-        primaryStage.setScene(new Scene(vbox, FXController.WIDTH, FXController.HEIGHT));
+        ScrollPane sp = new ScrollPane(vbox);
+        sp.setFitToWidth(true);
+        sp.setFitToHeight(true);
+
+        primaryStage.setScene(new Scene(sp, FXController.WIDTH, FXController.HEIGHT));
         primaryStage.show();
     }
 

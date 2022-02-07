@@ -12,10 +12,7 @@ import clothing.trait.Trait;
 import clothing.trait.Type;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -61,7 +58,12 @@ public class FXAddClothing {
         vbox.getChildren().add(confirm);
         vbox.setAlignment(Pos.CENTER);
 
-        primaryStage.setScene(new Scene(vbox, FXController.WIDTH, FXController.HEIGHT));
+        ScrollPane sp = new ScrollPane(vbox);
+        sp.setFitToHeight(true);
+        sp.setFitToWidth(true);
+
+        primaryStage.setScene(new Scene(sp, FXController.WIDTH, FXController.HEIGHT));
+        primaryStage.show();
     }
 
     /**
@@ -99,7 +101,11 @@ public class FXAddClothing {
         vbox.getChildren().addAll(new Text(stats), detailLabel, detail, buttons);
         vbox.setAlignment(Pos.CENTER);
 
-        primaryStage.setScene(new Scene(vbox, FXController.WIDTH, FXController.HEIGHT));
+        ScrollPane sp = new ScrollPane(vbox);
+        sp.setFitToWidth(true);
+        sp.setFitToHeight(true);
+
+        primaryStage.setScene(new Scene(sp, FXController.WIDTH, FXController.HEIGHT));
         primaryStage.show();
     }
 
