@@ -5,7 +5,7 @@
  * Desc: Manage the user IO for determining clothing compatibility
  */
 
-package closet.view;
+package closet.CLI;
 
 import closet.Closet;
 import closet.Compatible;

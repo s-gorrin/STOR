@@ -5,7 +5,7 @@
  * Desc: Add an item of clothing to a Closet
  */
 
-package closet.view;
+package closet.CLI;
 
 import closet.Closet;
 import closet.Compatible;
