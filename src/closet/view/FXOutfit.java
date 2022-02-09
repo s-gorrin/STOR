@@ -78,6 +78,16 @@ public class FXOutfit {
     }
 
     /**
+     * back button to get back to the landing page
+     * @param ps    the javafx stage
+     */
+    public static Button landingButton(Stage ps) {
+        Button back = new Button("back");
+        back.setOnAction(ActionEvent -> landing(ps));
+        return back;
+    }
+
+    /**
      * choose the criteria by which to pick the first item of an outfit
      * @param primaryStage  the javafx stage
      */
@@ -90,7 +100,7 @@ public class FXOutfit {
         color.setOnAction(ActionEvent -> firstByColor(primaryStage));
 
         VBox vBox = new VBox(FXController.PADDING);
-        vBox.getChildren().addAll(label, type, color);
+        vBox.getChildren().addAll(label, type, color, landingButton(primaryStage));
         handleScene(primaryStage, vBox);
     }
 
@@ -111,6 +121,7 @@ public class FXOutfit {
         VBox vBox = new VBox(FXController.PADDING);
         vBox.getChildren().add(label);
         vBox.getChildren().addAll(buttons);
+        vBox.getChildren().add(landingButton(primaryStage));
         handleScene(primaryStage, vBox);
 
     }
@@ -132,6 +143,7 @@ public class FXOutfit {
         VBox vBox = new VBox(FXController.PADDING);
         vBox.getChildren().add(label);
         vBox.getChildren().addAll(buttons);
+        vBox.getChildren().add(landingButton(primaryStage));
         handleScene(primaryStage, vBox);
     }
 
@@ -153,9 +165,13 @@ public class FXOutfit {
             buttons.add(b);
         }
 
+        Button back = new Button("back");
+        back.setOnAction(ActionEvent -> pickFirstBy(primaryStage));
+
         VBox vBox = new VBox(FXController.PADDING);
         vBox.getChildren().add(label);
         vBox.getChildren().addAll(buttons);
+        vBox.getChildren().add(back);
         handleScene(primaryStage, vBox);
     }
 
