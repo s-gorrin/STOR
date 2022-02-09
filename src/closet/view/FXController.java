@@ -115,7 +115,7 @@ public class FXController extends Application {
         Button outfit = new Button("create an outfit");
         Button manage = new Button("manage closet");
 
-        outfit.setOnAction(actionEvent -> outfitMenu(primaryStage));
+        outfit.setOnAction(actionEvent -> FXOutfit.landing(primaryStage));
 
         manage.setOnAction(actionEvent -> manageMenu(primaryStage));
 

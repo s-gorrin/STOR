@@ -29,10 +29,10 @@ public class FXTraitButtons {
     protected static Volume volume;
     protected static Warmth warmth;
 
-    public static boolean pockets;
-    public static boolean beltLoops;
+    protected static boolean pockets;
+    protected static boolean beltLoops;
 
-    public static int usesPerClean;
+    protected static int usesPerClean;
 
     /**
      * generate buttons from an enum

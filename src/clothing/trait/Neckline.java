@@ -9,8 +9,9 @@ package clothing.trait;
 
 public enum Neckline {
     CREW,
-    V,
+    V_NECK,
     TURTLE,
+    MOCK,
     POLO,
     HENLEY,
     SCOOP,
