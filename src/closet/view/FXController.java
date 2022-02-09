@@ -8,7 +8,7 @@
 package closet.view;
 
 import closet.Closet;
-import closet.ClosetSerializer;
+import clothing.ClosetSerializer;
 import closet.Compatible;
 import clothing.trait.Trait;
 import javafx.application.Application;

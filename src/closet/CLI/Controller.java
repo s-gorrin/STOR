@@ -8,7 +8,7 @@
 package closet.CLI;
 
 import closet.Closet;
-import closet.ClosetSerializer;
+import clothing.ClosetSerializer;
 import closet.Compatible;
 
 import java.io.File;
