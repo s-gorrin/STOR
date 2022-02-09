@@ -5,12 +5,9 @@
  * Desc: A class to serialize Clothing objects to json and convert them back
  */
 
-package closet;
+package clothing;
 
-import clothing.Clothing;
-import clothing.Pants;
-import clothing.SerialClothing;
-import clothing.Top;
+import closet.Closet;
 import clothing.trait.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -18,11 +15,13 @@ import com.google.gson.stream.JsonReader;
 
 import java.io.*;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Objects;
 
 public class ClosetSerializer {
     public static final String FILENAME = "closet.json";
+    private static final int TOO_MANY_ARCHIVES = 20;
 
     /**
      * Write a closet to JSON
@@ -51,19 +50,21 @@ public class ClosetSerializer {
             while (reader.hasNext()) {
                 SerialClothing item = gson.fromJson(reader, SerialClothing.class);
 
-                switch (item.getType()) {
-                    case TOP:
-                        closet.add(item.toTop(), item.getID());
-                        break;
-                    case PANTS:
-                        closet.add(item.toPants(), item.getID());
-                        break;
-                    case SKIRT:
-                        closet.add(item.toSkirt(), item.getID());
-                        break;
-                    case DRESS:
-                        closet.add(item.toDress(), item.getID());
-                        break;
+                if (item.sleeves != null && item.volume == null) { // top
+                    closet.add(item.toTop(), item.getID());
+                    System.out.println("added a top");
+                }
+                else if (item.volume == null && item.waist != null) { // pants
+                    closet.add(item.toPants(), item.getID());
+                    System.out.println("added a pants");
+                }
+                else if (item.volume != null && item.sleeves == null) { // skirt
+                    closet.add(item.toSkirt(), item.getID());
+                    System.out.println("added a skirt");
+                }
+                else if (item.volume != null) { // dress
+                    closet.add(item.toDress(), item.getID());
+                    System.out.println("added a dress");
                 }
             }
             reader.close();
@@ -71,9 +72,33 @@ public class ClosetSerializer {
             // After reading, copy the file to the archive
             int count = Objects.requireNonNull(new File("archive/").listFiles()).length;
             Files.copy(Paths.get(FILENAME), Paths.get("archive/archive-" + count + ".json"));
+
+            if (count >= TOO_MANY_ARCHIVES)
+                dumpOldSaves();
         }
         catch (IOException e) {
             System.out.println("There was a problem in ReadJSON: " + e);
+        }
+    }
+
+    /**
+     * when there are too many archives, write the newest 10 to the oldest 10
+     * these numbers may change
+     */
+    private static void dumpOldSaves() {
+        for (int i = 1; i <= TOO_MANY_ARCHIVES/2; i++) {
+            try{
+                Path sourcePath = new File("archive/archive-" + (i + TOO_MANY_ARCHIVES/2) + ".json").toPath();
+                Path targetPath = Paths.get("archive/archive-" + i + ".json");
+                File file = targetPath.toFile();
+                if(file.isFile()){
+                    Files.delete(targetPath);
+                }
+                Files.move(sourcePath, targetPath);
+            }
+            catch (IOException e) {
+                System.out.println("problem with dumping old saves");
+            }
         }
     }
 

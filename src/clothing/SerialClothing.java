@@ -10,15 +10,15 @@ package clothing;
 import clothing.trait.*;
 
 public class SerialClothing extends Clothing {
-    private Type type = Type.TOP;
-    private Length length = Length.NONE;
-    private Function function = Function.COMFORTABLE;
-    private Length sleeves = Length.NONE;
-    private Neckline neck = Neckline.CREW;
-    private Volume volume = Volume.TIGHT;
-    private Length waist = Length.NONE;
-    private boolean pockets = false;
-    private boolean beltLoops = false;
+    protected Type type;
+    protected Length length;
+    protected Function function;
+    protected Length sleeves;
+    protected Neckline neck;
+    protected Volume volume;
+    protected Length waist;
+    protected boolean pockets;
+    protected boolean beltLoops;
 
 
     /**
