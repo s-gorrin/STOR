@@ -11,7 +11,10 @@ import clothing.Clothing;
 import clothing.trait.Type;
 import clothing.trait.Warmth;
 
+import java.time.temporal.ChronoField;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -72,6 +75,18 @@ public class ClothingStream {
         }
     }
 
+    public static List<Integer> nOldest(Closet closet, int n) {
+        List<Integer> IDs = closet.getAllIDs().stream().sorted().collect(Collectors.toList());
+        return IDs.subList(0, n - 1);
+    }
 
+    public static List<Integer> nLeastUsed(Closet closet, int n) {
+        HashMap<Integer, Integer> usedID = new HashMap<>();
+        for (Clothing c : closet.getAllClothing())
+            usedID.put(c.getTotalUses(), c.getID());
+
+        return usedID.keySet().stream().sorted().map(usedID::get).collect(Collectors.toList()).subList(0, n-1);
+
+    }
 
 }

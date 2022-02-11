@@ -12,10 +12,8 @@ import clothing.trait.Color;
 import clothing.trait.Type;
 import clothing.trait.Warmth;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -32,16 +30,6 @@ public class FXOutfit {
     protected static List<Clothing> weather = new ArrayList<>(FXController.closet.getAllClothing());
     protected static Set<Integer> outfit = new HashSet<>();
 
-    private static void handleScene(Stage primaryStage, VBox vBox) {
-        vBox.setAlignment(Pos.CENTER);
-
-        ScrollPane sp = new ScrollPane(vBox);
-        sp.setFitToWidth(true);
-        sp.setFitToHeight(true);
-
-        primaryStage.setScene(new Scene(sp, FXController.WIDTH, FXController.HEIGHT));
-        primaryStage.show();
-    }
 
     /**
      * first page of the outfit picker
@@ -74,7 +62,7 @@ public class FXOutfit {
 
         VBox vBox = new VBox(FXController.PADDING);
         vBox.getChildren().addAll(prompt, warm, neutral, cold, FXController.home(primaryStage));
-        handleScene(primaryStage, vBox);
+        FXController.handleScene(primaryStage, vBox);
     }
 
     /**
@@ -101,7 +89,7 @@ public class FXOutfit {
 
         VBox vBox = new VBox(FXController.PADDING);
         vBox.getChildren().addAll(label, type, color, landingButton(primaryStage));
-        handleScene(primaryStage, vBox);
+        FXController.handleScene(primaryStage, vBox);
     }
 
     /**
@@ -122,7 +110,7 @@ public class FXOutfit {
         vBox.getChildren().add(label);
         vBox.getChildren().addAll(buttons);
         vBox.getChildren().add(landingButton(primaryStage));
-        handleScene(primaryStage, vBox);
+        FXController.handleScene(primaryStage, vBox);
 
     }
 
@@ -144,7 +132,7 @@ public class FXOutfit {
         vBox.getChildren().add(label);
         vBox.getChildren().addAll(buttons);
         vBox.getChildren().add(landingButton(primaryStage));
-        handleScene(primaryStage, vBox);
+        FXController.handleScene(primaryStage, vBox);
     }
 
     // This will leave the option to limit the whole suggestion process to the warmth-filtered list
@@ -172,7 +160,7 @@ public class FXOutfit {
         vBox.getChildren().add(label);
         vBox.getChildren().addAll(buttons);
         vBox.getChildren().add(back);
-        handleScene(primaryStage, vBox);
+        FXController.handleScene(primaryStage, vBox);
     }
 
     /**
@@ -208,7 +196,7 @@ public class FXOutfit {
         vBox.getChildren().add(label);
         vBox.getChildren().addAll(toggleButtons);
         vBox.getChildren().add(choose);
-        handleScene(primaryStage, vBox);
+        FXController.handleScene(primaryStage, vBox);
     }
 
     /**
@@ -242,7 +230,7 @@ public class FXOutfit {
         hBox.setAlignment(Pos.CENTER);
         VBox vBox = new VBox(FXController.PADDING);
         vBox.getChildren().addAll(label, new Text(items.toString()), hBox);
-        handleScene(primaryStage, vBox);
+        FXController.handleScene(primaryStage, vBox);
     }
 
     /**
@@ -253,7 +241,7 @@ public class FXOutfit {
     public static void summary(Stage primaryStage, String confirmed) {
         VBox vBox = new VBox(FXController.PADDING);
         vBox.getChildren().addAll(new Text(confirmed), FXController.home(primaryStage));
-        handleScene(primaryStage, vBox);
+        FXController.handleScene(primaryStage, vBox);
     }
 
 }

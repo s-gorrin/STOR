@@ -21,7 +21,7 @@ import java.util.Objects;
 
 public class ClosetSerializer {
     public static final String FILENAME = "closet.json";
-    private static final int TOO_MANY_ARCHIVES = 20;
+    private static final int TOO_MANY_ARCHIVES = 40;
 
     /**
      * Write a closet to JSON

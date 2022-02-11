@@ -7,12 +7,14 @@
 
 package closet.view;
 
+import closet.BackgroundSaver;
 import clothing.*;
 import clothing.trait.Trait;
 import clothing.trait.Type;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -49,21 +51,14 @@ public class FXAddClothing {
             for (ToggleButton tb : toggleButtons)
                 if (tb.isSelected())
                     FXController.compatible.add(item.getID(), Integer.parseInt(tb.getId()));
-
+            new BackgroundSaver(FXController.closet, FXController.compatible).start(); // save closet in the background
             FXTraitScenes.scene(primaryStage, Trait.TYPE); // go back to add another item
         });
 
         vbox.getChildren().add(new Text("please select the items that are compatible with\n" + item.getName()));
         vbox.getChildren().addAll(toggleButtons);
         vbox.getChildren().add(confirm);
-        vbox.setAlignment(Pos.CENTER);
-
-        ScrollPane sp = new ScrollPane(vbox);
-        sp.setFitToHeight(true);
-        sp.setFitToWidth(true);
-
-        primaryStage.setScene(new Scene(sp, FXController.WIDTH, FXController.HEIGHT));
-        primaryStage.show();
+        FXController.handleScene(primaryStage, vbox);
     }
 
     /**
@@ -99,14 +94,7 @@ public class FXAddClothing {
         buttons.setAlignment(Pos.CENTER);
 
         vbox.getChildren().addAll(new Text(stats), detailLabel, detail, buttons);
-        vbox.setAlignment(Pos.CENTER);
-
-        ScrollPane sp = new ScrollPane(vbox);
-        sp.setFitToWidth(true);
-        sp.setFitToHeight(true);
-
-        primaryStage.setScene(new Scene(sp, FXController.WIDTH, FXController.HEIGHT));
-        primaryStage.show();
+        FXController.handleScene(primaryStage, vbox);
     }
 
     /**

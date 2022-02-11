@@ -34,6 +34,21 @@ public class FXController extends Application {
         launch(args);
     }
 
+    /**
+     * set up the scene for various other methods to use
+     * @param primaryStage  the javafx stage
+     * @param vBox          a VBox containing the elements of the scene
+     */
+    protected static void handleScene(Stage primaryStage, VBox vBox) {
+        vBox.setAlignment(Pos.CENTER);
+
+        ScrollPane sp = new ScrollPane(vBox);
+        sp.setFitToWidth(true);
+        sp.setFitToHeight(true);
+
+        primaryStage.setScene(new Scene(sp, WIDTH, HEIGHT));
+        primaryStage.show();
+    }
 
     /**
      * generate a home button to use in any screen
@@ -69,23 +84,6 @@ public class FXController extends Application {
     }
 
     /**
-     * landing page for the outfit picker functionality
-     * @param primaryStage  the javafx stage
-     */
-    public static void outfitMenu(Stage primaryStage) {
-        VBox outfitMenu = new VBox(PADDING);
-
-        outfitMenu.getChildren().addAll(home(primaryStage), exit());
-        outfitMenu.setAlignment(Pos.CENTER);
-
-        ScrollPane sp = new ScrollPane(outfitMenu);
-        sp.setFitToWidth(true);
-        sp.setFitToHeight(true);
-        primaryStage.setScene(new Scene(sp, WIDTH, HEIGHT));
-        primaryStage.show();
-    }
-
-    /**
      * landing page for the closet management functionality
      * @param primaryStage  the javafx stage
      */
@@ -96,13 +94,7 @@ public class FXController extends Application {
         add.setOnAction(ActionEvent -> FXTraitScenes.scene(primaryStage, Trait.TYPE));
 
         manageMenu.getChildren().addAll(add, home(primaryStage), exit());
-        manageMenu.setAlignment(Pos.CENTER);
-
-        ScrollPane sp = new ScrollPane(manageMenu);
-        sp.setFitToWidth(true);
-        sp.setFitToHeight(true);
-        primaryStage.setScene(new Scene(sp, WIDTH, HEIGHT));
-        primaryStage.show();
+        handleScene(primaryStage, manageMenu);
     }
 
 
@@ -120,13 +112,7 @@ public class FXController extends Application {
         manage.setOnAction(actionEvent -> manageMenu(primaryStage));
 
         vbox.getChildren().addAll(outfit, manage, exit());
-        vbox.setAlignment(Pos.CENTER);
-
-        ScrollPane sp = new ScrollPane(vbox);
-        sp.setFitToWidth(true);
-        sp.setFitToHeight(true);
-        primaryStage.setScene(new Scene(sp, WIDTH, HEIGHT));
-        primaryStage.show();
+        handleScene(primaryStage, vbox);
     }
 
 
