@@ -5,7 +5,7 @@
  * Desc: The primary controller for the STOR application - structure may change
  */
 
-package closet.CLI;
+package closet.cli;
 
 import closet.Closet;
 import clothing.ClosetSerializer;

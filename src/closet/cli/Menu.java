@@ -5,7 +5,7 @@
  * Desc: Define a menu for the STOR application and handle the menu user input
  */
 
-package closet.CLI;
+package closet.cli;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;

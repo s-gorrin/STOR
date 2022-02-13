@@ -5,7 +5,7 @@
  * Desc: The menu for the manage closet option from the main menu
  */
 
-package closet.CLI;
+package closet.cli;
 
 public class ManageClosetMenu extends Menu {
     // Note: this must be changed if menu options are added or removed

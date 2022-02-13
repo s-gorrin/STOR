@@ -5,7 +5,7 @@
  * Desc: The main menu of the application
  */
 
-package closet.CLI;
+package closet.cli;
 
 public class MainMenu extends Menu {
     // Note: this must be changed if menu options are added or removed
