@@ -89,11 +89,13 @@ public class FXController extends Application {
      */
     public static void manageMenu(Stage primaryStage) {
         VBox manageMenu = new VBox(PADDING);
-        Button add = new Button("add a clothing item");
+        Button add = new Button("add clothing");
+        Button remove = new Button("remove clothing");
 
         add.setOnAction(ActionEvent -> FXTraitScenes.scene(primaryStage, Trait.TYPE));
+        remove.setOnAction(ActionEvent -> FXRemoveClothing.landing(primaryStage));
 
-        manageMenu.getChildren().addAll(add, home(primaryStage), exit());
+        manageMenu.getChildren().addAll(add, remove, home(primaryStage), exit());
         handleScene(primaryStage, manageMenu);
     }
 

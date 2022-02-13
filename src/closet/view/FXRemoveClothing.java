@@ -7,15 +7,17 @@
 
 package closet.view;
 
+import closet.ClothingList;
 import clothing.Clothing;
 import clothing.trait.Color;
 import clothing.trait.Type;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.time.temporal.ChronoField;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -104,11 +106,10 @@ public class FXRemoveClothing {
         Label label = new Label("select how many of the oldest");
         ArrayList<Button> buttons = new ArrayList<>();
 
-        for (int i = 0; i < 10; i += 2) {
+        for (int i = 2; i <= 12; i += 2) {
             Button button = new Button(String.valueOf(i));
-            int finalI = i;
-            button.setOnAction(a -> selectRemovals(primaryStage, FXController.closet.getAllIDs().stream()
-                    .sorted().collect(Collectors.toList()).subList(0, finalI)));
+            int n = i;
+            button.setOnAction(a -> selectRemovals(primaryStage, ClothingList.nOldest(FXController.closet, n)));
             buttons.add(button);
         }
 
@@ -119,14 +120,90 @@ public class FXRemoveClothing {
         FXController.handleScene(primaryStage, vBox);
     }
 
-    //todo implement methods below
     /**
      * select how many of the lowest-use items to view
      * @param primaryStage  the javafx stage
      */
     public static void uses(Stage primaryStage) {
+        Label label = new Label("select how many of the lowest-use");
         ArrayList<Button> buttons = new ArrayList<>();
+
+        for (int i = 2; i <= 12; i += 2) {
+            Button button = new Button(String.valueOf(i));
+            int n = i;
+            button.setOnAction(a -> selectRemovals(primaryStage, ClothingList.nLeastUsed(FXController.closet, n)));
+            buttons.add(button);
+        }
+
+        VBox vBox = new VBox(FXController.PADDING);
+        vBox.getChildren().add(label);
+        vBox.getChildren().addAll(buttons);
+        vBox.getChildren().add(landingButton(primaryStage));
+        FXController.handleScene(primaryStage, vBox);
     }
 
-    public static void selectRemovals(Stage primaryStage, List<Integer> candidates) {}
+    /**
+     * select items to be removed from the closet
+     * @param primaryStage  the javafx stage
+     * @param candidates    possible items for removal
+     */
+    public static void selectRemovals(Stage primaryStage, List<Integer> candidates) {
+        Label label = new Label("select clothes to remove\nfrom the closet forever");
+        ArrayList<ToggleButton> buttons = new ArrayList<>();
+        Button confirm = new Button("view selections");
+
+        for (int ID : candidates) {
+            ToggleButton button = new ToggleButton(FXController.closet.get(ID).getName());
+
+            button.setId(String.valueOf(ID));
+            buttons.add(button);
+        }
+
+        confirm.setOnAction(ActionEvent -> {
+            List<Integer> remove = new ArrayList<>();
+            for (ToggleButton tb : buttons)
+                if (tb.isSelected())
+                    remove.add(Integer.parseInt(tb.getId()));
+
+            confirmRemovals(primaryStage, remove);
+        });
+
+        VBox vBox = new VBox(FXController.PADDING);
+        vBox.getChildren().add(label);
+        vBox.getChildren().addAll(buttons);
+        vBox.getChildren().addAll(confirm, landingButton(primaryStage));
+        FXController.handleScene(primaryStage, vBox);
+    }
+
+    /**
+     * confirm items to be removed
+     * @param primaryStage  the javafx stage
+     * @param remove        the list of items to be removed
+     */
+    private static void confirmRemovals(Stage primaryStage, List<Integer> remove) {
+        Label label = new Label("items to be removed:");
+        Button confirm = new Button("remove items from closet");
+        Button cancel = new Button("do not remove items");
+        StringBuilder names = new StringBuilder();
+
+        for (int ID : remove)
+            names.append(FXController.closet.get(ID).getName()).append("\n");
+
+        Text text = new Text(names.toString());
+
+        confirm.setOnAction(ActionEvent -> {
+            for (int ID : remove) {
+                FXController.closet.remove(ID);
+                FXController.compatible.remove(ID);
+            }
+
+            landing(primaryStage);
+        });
+
+        cancel.setOnAction(ActionEvent -> landing(primaryStage));
+
+        VBox vBox = new VBox(FXController.PADDING);
+        vBox.getChildren().addAll(label, text, confirm, cancel);
+        FXController.handleScene(primaryStage, vBox);
+    }
 }
