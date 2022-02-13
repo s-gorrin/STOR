@@ -30,5 +30,3 @@ public class BackgroundSaver extends Thread {
         }
     }
 }
-
-//create new thread, thread.start()
