@@ -1,5 +1,6 @@
 package closet;
 
+import clothing.ClosetSerializer;
 import clothing.Pants;
 import clothing.Top;
 import clothing.trait.*;
@@ -8,12 +9,15 @@ import org.junit.Test;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Scanner;
 
 public class ClosetArchiverTest {
 
     @Test
     public void save() {
+        ClosetArchiver.setTest();
         Closet closet = new Closet();
         closet.add(new Pants(Material.WOOL, Textile.TWILL, Color.GRAY,  Warmth.WARM, Fastener.BUTTON,
                 2, Length.LONG, Function.FORMAL, Length.MEDIUM, true, true));
@@ -22,7 +26,7 @@ public class ClosetArchiverTest {
         closet.get(0).addUse();
 
         ClosetArchiver.save(closet);
-        File file = new File(ClosetArchiver.FILENAME);
+        File file = new File(ClosetArchiver.TEST_FILE);
         Assert.assertTrue(file.exists());
 
         Scanner reader;
@@ -41,10 +45,17 @@ public class ClosetArchiverTest {
 
         closet = ClosetArchiver.retrieve();
         Assert.assertTrue(((Pants)closet.get(0)).getPockets());
+
+        try { Files.deleteIfExists(new File(ClosetArchiver.TEST_FILE).toPath()); }
+        catch (IOException e) {
+            System.out.println("Somehow the file did not exist.");
+        }
+        System.out.println("please manually delete test/archive-#.csv file");
     }
 
     @Test
     public void retrieve() {
+        ClosetArchiver.setTest();
         Closet closet = new Closet();
         closet.add(new Pants(Material.WOOL, Textile.TWILL, Color.GRAY,  Warmth.WARM, Fastener.BUTTON,
                 2, Length.LONG, Function.FORMAL, Length.MEDIUM, true, true));
@@ -65,5 +76,13 @@ public class ClosetArchiverTest {
 
         Closet badSave = ClosetArchiver.retrieve();
         Assert.assertFalse(badSave.contains(1)); // the new Top was not in the retrieved closet due to MissingData
+
+        try {
+            Files.deleteIfExists(new File(ClosetArchiver.TEST_FILE).toPath());
+        }
+        catch (IOException e) {
+            System.out.println("Somehow the file did not exist.");
+        }
+        System.out.println("please manually delete test/archive-#.csv files");
     }
 }

@@ -20,7 +20,20 @@ import java.util.Scanner;
 import static java.lang.Integer.parseInt;
 
 public class ClosetArchiver {
-    public static final String FILENAME = "archive/closet.csv";
+    public static final String DIR = "archive/";
+    public static final String FILENAME = DIR + "closet.csv";
+
+    public static final String TEST_DIR = "test/";
+    public static final String TEST_FILE = TEST_DIR + "closet.csv";
+
+    public static boolean test = false;
+
+    /**
+     * used to indicate test run
+     */
+    public static void setTest() {
+        test = true;
+    }
 
     /**
      * Get a CSV string representation for the Clothing attributes
@@ -127,7 +140,8 @@ public class ClosetArchiver {
      * @param closet    an instance of the Closet class
      */
     public static void save(Closet closet) {
-        File archive = new File(FILENAME);
+        String filename = test ? TEST_FILE : FILENAME;
+        File archive = new File(filename);
         FileWriter writer;
 
         try {
@@ -301,10 +315,11 @@ public class ClosetArchiver {
      * @return  A Closet object
      */
     public static Closet retrieve() {
+        String filename = test ? TEST_FILE : FILENAME;
         Closet closet = new Closet();
 
         try {
-            Scanner reader = new Scanner(new File(FILENAME));
+            Scanner reader = new Scanner(new File(filename));
             reader.nextLine(); // the first line is field labels
 
             while (reader.hasNextLine()) {
@@ -321,9 +336,11 @@ public class ClosetArchiver {
             System.out.println("Exception in ClosetArchiver.addLine(): " + e);
         }
 
-        int count = Objects.requireNonNull(new File("archive/").listFiles()).length;
+        String dir = test ? TEST_DIR : DIR;
+
+        int count = Objects.requireNonNull(new File(dir).listFiles()).length;
         try {
-            Files.move(Paths.get(FILENAME), Paths.get("archive/archive-" + count + ".csv"));
+            Files.move(Paths.get(filename), Paths.get(dir + "archive-" + count + ".csv"));
         }
         catch (IOException e) {
             System.out.println("Exception in ClosetArchiver: " + e);
