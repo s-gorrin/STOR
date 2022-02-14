@@ -8,7 +8,6 @@
 package clothing;
 
 import closet.Closet;
-import clothing.trait.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
@@ -106,38 +105,6 @@ public class ClosetSerializer {
             catch (IOException e) {
                 System.out.println("problem with dumping old saves");
             }
-        }
-    }
-
-
-    public static void main(String[] args) {
-        Closet closet = new Closet();
-        closet.add(new Top(Length.LONG, Function.CASUAL, Length.MEDIUM, Neckline.COLLAR));
-        closet.get(0).setColor(Color.GREEN);
-        closet.add(new Top(Length.SHORT, Function.WORK, Length.LONG, Neckline.COWL));
-        closet.add(new Top(Length.MEDIUM, Function.ATHLETIC, Length.SHORT, Neckline.CREW));
-        closet.add(new Pants(Length.SHORT, Function.FORMAL, Length.LONG, true, true));
-        closet.add(new Pants(Length.MEDIUM, Function.COMFORTABLE, Length.MEDIUM, true, false));
-        closet.add(new Pants(Length.LONG, Function.FORMAL, Length.MEDIUM, true, true));
-
-        try { ClosetSerializer.writeJSON(closet); }
-        catch (IOException e) {
-            System.out.println("problem writing json: " + e.getMessage());
-        }
-
-        Closet read_in = new Closet();
-        try { ClosetSerializer.readJSON(read_in); }
-        catch (FileNotFoundException e) {
-            System.out.println("json file not found: " + e.getMessage());
-        }
-
-        for (Clothing c : closet.getAllClothing()) {
-            System.out.print("ID: " + c.getID() + " type: " + c.getType().toString().toLowerCase() +
-                    " length: ");
-            if (c.getType() == Type.TOP)
-                System.out.println(((Top)c).getLength());
-            if (c.getType() == Type.PANTS)
-                System.out.println((((Pants)c).getLength()));
         }
     }
 }
