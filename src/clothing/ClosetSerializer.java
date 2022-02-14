@@ -21,7 +21,14 @@ import java.util.Objects;
 
 public class ClosetSerializer {
     public static final String FILENAME = "closet.json";
+    public static final String TEST_FILE = "test/closet.json";
     private static final int TOO_MANY_ARCHIVES = 40;
+
+    private static boolean test = false;
+
+    public static void setTest() {
+        test = true;
+    }
 
     /**
      * Write a closet to JSON
@@ -30,8 +37,13 @@ public class ClosetSerializer {
      */
     public static void writeJSON(Closet closet) throws IOException {
         Gson gson = new GsonBuilder().create();
+        FileWriter writer;
 
-        FileWriter writer = new FileWriter(FILENAME);
+        if (test)
+            writer = new FileWriter(TEST_FILE);
+
+        else
+            writer = new FileWriter(FILENAME);
         writer.write(gson.toJson(closet.getAllClothing()));
         writer.close();
     }
@@ -44,28 +56,23 @@ public class ClosetSerializer {
      */
     public static void readJSON(Closet closet) throws FileNotFoundException {
         Gson gson = new GsonBuilder().create();
+        String filename = FILENAME;
+        if (test)
+            filename = TEST_FILE;
 
-        try (JsonReader reader = new JsonReader(new FileReader(FILENAME))) {
+        try (JsonReader reader = new JsonReader(new FileReader(filename))) {
             reader.beginArray(); // This line is critical
             while (reader.hasNext()) {
                 SerialClothing item = gson.fromJson(reader, SerialClothing.class);
 
-                if (item.sleeves != null && item.volume == null) { // top
+                if (item.sleeves != null && item.volume == null)        // top
                     closet.add(item.toTop(), item.getID());
-                    System.out.println("added a top");
-                }
-                else if (item.volume == null && item.waist != null) { // pants
+                else if (item.volume == null && item.waist != null)     // pants
                     closet.add(item.toPants(), item.getID());
-                    System.out.println("added a pants");
-                }
-                else if (item.volume != null && item.sleeves == null) { // skirt
+                else if (item.volume != null && item.sleeves == null)   // skirt
                     closet.add(item.toSkirt(), item.getID());
-                    System.out.println("added a skirt");
-                }
-                else if (item.volume != null) { // dress
+                else if (item.volume != null)                           // dress
                     closet.add(item.toDress(), item.getID());
-                    System.out.println("added a dress");
-                }
             }
             reader.close();
 
