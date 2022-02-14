@@ -1,10 +1,12 @@
+package closet.cli;
+
 import closet.Closet;
 import closet.TraitCounter;
 import clothing.*;
 import clothing.trait.*;
 
 
-public class Main {
+public class CLIMain {
 
     /**
      * A non-production method to fill a Closet with values
