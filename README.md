@@ -6,6 +6,7 @@ STOR is an application for managing a closet and organizing outfits.
 Running in Java 11 or higher.  
 GUI built on [JavaFX SDK 17.0.2](https://gluonhq.com/products/javafx/).  
 Serializing to JSON with [GSON 2.8.5](https://mvnrepository.com/artifact/com.google.code.gson/gson/2.8.5).  
+SQLite managed with [SQLite-JDBC 3.36.0.3](https://github.com/xerial/sqlite-jdbc/)  
 Testing with [JUnit 4.13.2](https://mvnrepository.com/artifact/junit/junit/4.13.2).
 
 ## Usage

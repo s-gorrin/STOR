@@ -11,6 +11,8 @@ import closet.Closet;
 import clothing.ClosetSerializer;
 import closet.Compatible;
 import clothing.trait.Trait;
+import database.Add;
+import database.Database;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -68,15 +70,20 @@ public class FXController extends Application {
     public static Button exit() {
         Button exit = new Button("exit");
         exit.setOnAction(actionEvent -> {
+            compatible.writeToDatabase(closet.getAllIDs());
+            Add.addCloset(closet);
+            /*
             try { ClosetSerializer.writeJSON(closet); }
             catch (IOException e) {
                 System.out.println("Problem writing the closet file:" + e.getMessage());
             }
 
+
             try { compatible.writeToFile(); }
             catch (IOException e) {
                 System.out.println("Problem writing the compatibility file: " + e.getMessage());
             }
+            */
             System.exit(0);
         });
         exit.setCancelButton(true);
@@ -126,15 +133,22 @@ public class FXController extends Application {
     public void start(Stage primaryStage) {
         primaryStage.setTitle("STOR");
 
+        Database.createTables();
+        Database.loadCloset(closet);
+        compatible.retrieveFromDatabase();
+
+        /*
         try { ClosetSerializer.readJSON(closet); }
         catch (FileNotFoundException e) {
             System.out.println("Failed to locate file \"" + ClosetSerializer.FILENAME + "\", starting new Closet.");
         }
 
+
         try { compatible.readFromFile(); }
         catch (IOException e) {
             System.out.println("Failed to locate file\"" + Compatible.FILENAME + "\", starting new table.");
         }
+        */
 
         mainMenu(primaryStage);
     }

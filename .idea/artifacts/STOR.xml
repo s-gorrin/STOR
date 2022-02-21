@@ -1,0 +1,17 @@
+<component name="ArtifactManager">
+  <artifact build-on-make="true" name="STOR">
+    <output-path>$PROJECT_DIR$/out/artifacts/STOR</output-path>
+    <root id="root">
+      <element id="library" level="project" name="junit" />
+      <element id="library" level="project" name="google.code.gson" />
+      <element id="library" level="project" name="javafx-base-17-mac-aarch64" />
+      <element id="library" level="project" name="lib" />
+      <element id="archive" name="STOR.jar">
+        <element id="module-output" name="STOR" />
+        <element id="directory" name="META-INF">
+          <element id="file-copy" path="$PROJECT_DIR$/../META-INF/MANIFEST.MF" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

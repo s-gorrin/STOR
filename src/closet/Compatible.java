@@ -7,17 +7,19 @@
 
 package closet;
 
+import database.Add;
+import database.Retrieve;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Compatible {
     public static final String FILENAME = "comp.csv";
 
-    private final HashMap<Integer, HashSet<Integer>> record;
+    private HashMap<Integer, HashSet<Integer>> record;
 
     /**
      * Class constructor
@@ -119,5 +121,21 @@ public class Compatible {
         }
 
         reader.close();
+    }
+
+    /**
+     * write the compatibility table to the database
+     */
+    public void writeToDatabase(Set<Integer> IDs) {
+        Add.resetCompatibility(IDs);
+        for (Integer id : record.keySet().stream().sorted().collect(Collectors.toList()))
+            Add.compatibility(id, List.copyOf(record.get(id)).stream().sorted().collect(Collectors.toList()));
+    }
+
+    /**
+     * get a compatibility table from the database
+     */
+    public void retrieveFromDatabase() {
+        record = Retrieve.compatibility();
     }
 }
