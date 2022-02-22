@@ -116,6 +116,11 @@ public class Database {
         for (Dress dress : Retrieve.dresses())
             closet.add(dress, dress.getID());
 
+        closet.setNextID();
+
+        for (Clothing c : closet.getAllClothing()) {
+            System.out.println("loaded in: " + c.getName() + " - " + c.getID());
+        }
     }
 
     /**
@@ -138,6 +143,33 @@ public class Database {
         }
 
         return false;
+    }
+
+    /**
+     * delete a clothing item from the database
+     * @param ID  the ID of a clothing item
+     */
+    public static void remove(int ID) {
+        String getType = "SELECT type FROM Clothing WHERE clothing_id == " + ID;
+        String deleteClothing = "DELETE FROM Clothing WHERE clothing_id == " + ID;
+        String deleteComp = "DELETE FROM Compatibility WHERE clothing_id == " + ID;
+
+        try (Connection conn = DriverManager.getConnection(Database.URL);
+             Statement statement = conn.createStatement()){
+
+            // get type of clothing and format it as table name
+            String type = statement.executeQuery(getType).getString(1);
+            type = type.charAt(0) + type.substring(1).toLowerCase();
+
+            @SuppressWarnings("SqlResolve") String deleteType = "DELETE FROM " + type + " WHERE clothing_id == " + ID;
+
+            statement.executeUpdate(deleteClothing);
+            statement.executeUpdate(deleteType);
+            statement.executeUpdate(deleteComp);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {

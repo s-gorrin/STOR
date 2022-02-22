@@ -26,6 +26,7 @@ public class Add {
      */
     public static void addCloset(Closet closet) {
         for (Clothing clothing : closet.getAllClothing()) {
+            System.out.println("trying to add: " + clothing.getName() + " - " + clothing.getID());
             if (!Database.keyInDatabase(clothing.getID()))
                 switch (clothing.getType()) {
                     case TOP:
@@ -53,6 +54,8 @@ public class Add {
      * @param clothing  the Clothing
      */
     public static void clothing(Clothing clothing) {
+        System.out.println("adding " + clothing.getName());
+
         String sql = "INSERT INTO Clothing (clothing_id, type, added, total_uses, uses_since_cleaned, clean_level," +
                 "last_used, material, textile, color, warmth, fastener, uses_per_clean, detail) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -184,13 +187,17 @@ public class Add {
      * @param compatible    a list of compatible items
      */
     public static void compatibility(int ID, List<Integer> compatible) {
+        String drop = "DROP TABLE IF EXISTS Old_comp";
 
-        try (Connection conn = DriverManager.getConnection(Database.URL)) {
+        try (Connection conn = DriverManager.getConnection(Database.URL);
+             Statement statement = conn.createStatement()) {
             for (Integer id : compatible) {
-                String row = "UPDATE Compatibility SET \"" + id + "\" = " + ID + " WHERE clothing_id == " + ID;
+                @SuppressWarnings("SqlResolve") String row = "UPDATE Compatibility SET \"" + id + "\" = "
+                        + ID + " WHERE clothing_id == " + ID;
                 conn.prepareStatement(row).executeUpdate();
             }
 
+            statement.executeUpdate(drop); // drop the old compatibility table after making the new one
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -201,13 +208,13 @@ public class Add {
      * reset the compatibility table to re-save because this is designed badly :)
      */
     public static void resetCompatibility(Set<Integer> IDs) {
-        String drop = "DROP TABLE IF EXISTS Compatibility";
+        String rename = "ALTER TABLE Compatibility RENAME TO Old_comp";
         String create = "CREATE TABLE IF NOT EXISTS Compatibility (" +
                 "clothing_id INTEGER NOT NULL PRIMARY KEY)";
 
         try (Connection conn = DriverManager.getConnection(Database.URL);
              Statement statement = conn.createStatement()) {
-            statement.executeUpdate(drop);
+            statement.executeUpdate(rename);
             statement.executeUpdate(create);
 
             for (int ID : IDs) {

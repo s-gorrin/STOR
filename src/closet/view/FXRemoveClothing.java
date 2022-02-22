@@ -11,6 +11,7 @@ import closet.ClothingList;
 import clothing.Clothing;
 import clothing.trait.Color;
 import clothing.trait.Type;
+import database.Database;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
@@ -195,6 +196,8 @@ public class FXRemoveClothing {
             for (int ID : remove) {
                 FXController.closet.remove(ID);
                 FXController.compatible.remove(ID);
+
+                Database.remove(ID);
             }
 
             landing(primaryStage);

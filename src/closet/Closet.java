@@ -58,6 +58,16 @@ public class Closet {
     }
 
     /**
+     * ensure that nextID has the correct value after reading closet from an outside source
+     */
+    public void setNextID() {
+        for (int id : getAllIDs()) {
+            if (id >= nextID)
+                nextID = id + 1;
+        }
+    }
+
+    /**
      * POST-CONDITION: the Clothing corresponding to the ID is removed from closet and returned
      * @param ID    the ID of the item to be removed
      * @return      the Clothing that was removed
