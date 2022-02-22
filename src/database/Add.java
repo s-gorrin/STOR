@@ -26,24 +26,19 @@ public class Add {
      */
     public static void addCloset(Closet closet) {
         for (Clothing clothing : closet.getAllClothing()) {
-            System.out.println("trying to add: " + clothing.getName() + " - " + clothing.getID());
             if (!Database.keyInDatabase(clothing.getID()))
                 switch (clothing.getType()) {
                     case TOP:
                         top((Top) clothing);
-                        System.out.println("added: " + clothing.getName());
                         break;
                     case PANTS:
                         pants((Pants) clothing);
-                        System.out.println("added: " + clothing.getName());
                         break;
                     case SKIRT:
                         skirt((Skirt) clothing);
-                        System.out.println("added: " + clothing.getName());
                         break;
                     case DRESS:
                         dress((Dress) clothing);
-                        System.out.println("added: " + clothing.getName());
                         break;
                 }
         }
@@ -54,8 +49,6 @@ public class Add {
      * @param clothing  the Clothing
      */
     public static void clothing(Clothing clothing) {
-        System.out.println("adding " + clothing.getName());
-
         String sql = "INSERT INTO Clothing (clothing_id, type, added, total_uses, uses_since_cleaned, clean_level," +
                 "last_used, material, textile, color, warmth, fastener, uses_per_clean, detail) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
