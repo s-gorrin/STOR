@@ -1,14 +1,13 @@
 /**
  * Name: Seth Gorrin
  * Class: CS-622
- * Date: 2/05/2022
+ * Date: 2/22/2022
  * Desc: Start the GUI from here
  */
 
 package closet.view;
 
 import closet.Closet;
-import clothing.ClosetSerializer;
 import closet.Compatible;
 import clothing.trait.Trait;
 import database.Add;
@@ -20,9 +19,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
 
 public class FXController extends Application {
     public static final int PADDING = 5;
@@ -72,18 +68,7 @@ public class FXController extends Application {
         exit.setOnAction(actionEvent -> {
             compatible.writeToDatabase(closet.getAllIDs());
             Add.addCloset(closet);
-            /*
-            try { ClosetSerializer.writeJSON(closet); }
-            catch (IOException e) {
-                System.out.println("Problem writing the closet file:" + e.getMessage());
-            }
 
-
-            try { compatible.writeToFile(); }
-            catch (IOException e) {
-                System.out.println("Problem writing the compatibility file: " + e.getMessage());
-            }
-            */
             System.exit(0);
         });
         exit.setCancelButton(true);
@@ -136,19 +121,6 @@ public class FXController extends Application {
         Database.createTables();
         Database.loadCloset(closet);
         compatible.retrieveFromDatabase();
-
-        /*
-        try { ClosetSerializer.readJSON(closet); }
-        catch (FileNotFoundException e) {
-            System.out.println("Failed to locate file \"" + ClosetSerializer.FILENAME + "\", starting new Closet.");
-        }
-
-
-        try { compatible.readFromFile(); }
-        catch (IOException e) {
-            System.out.println("Failed to locate file\"" + Compatible.FILENAME + "\", starting new table.");
-        }
-        */
 
         mainMenu(primaryStage);
     }
