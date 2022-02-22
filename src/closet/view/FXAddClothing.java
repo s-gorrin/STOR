@@ -1,7 +1,7 @@
 /**
  * Name: Seth Gorrin
  * Class: CS-622
- * Date: 2/06/2022
+ * Date: 2/22/2022
  * Desc: Methods for the add clothing gui
  */
 
@@ -11,10 +11,9 @@ import closet.BackgroundSaver;
 import clothing.*;
 import clothing.trait.Trait;
 import clothing.trait.Type;
+import database.BackgroundAdd;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -51,7 +50,6 @@ public class FXAddClothing {
             for (ToggleButton tb : toggleButtons)
                 if (tb.isSelected())
                     FXController.compatible.add(item.getID(), Integer.parseInt(tb.getId()));
-            new BackgroundSaver(FXController.closet, FXController.compatible).start(); // save closet in the background
             FXTraitScenes.scene(primaryStage, Trait.TYPE); // go back to add another item
         });
 
@@ -123,6 +121,7 @@ public class FXAddClothing {
 
             top.setDetail(detail.getText()); // this should accept the detail as text
             FXController.closet.add(top);
+            new BackgroundAdd(top, Type.TOP).start();
             compatibility(primaryStage, top);
         });
 
@@ -159,6 +158,7 @@ public class FXAddClothing {
 
             pants.setDetail(detail.getText()); // this should accept the detail as text
             FXController.closet.add(pants);
+            new BackgroundAdd(pants, Type.PANTS).start();
             compatibility(primaryStage, pants);
         });
 
@@ -195,6 +195,7 @@ public class FXAddClothing {
 
             skirt.setDetail(detail.getText()); // this should accept the detail as text
             FXController.closet.add(skirt);
+            new BackgroundAdd(skirt, Type.SKIRT).start();
             compatibility(primaryStage, skirt);
         });
 
@@ -232,6 +233,7 @@ public class FXAddClothing {
 
             dress.setDetail(detail.getText()); // this should accept the detail as text
             FXController.closet.add(dress);
+            new BackgroundAdd(dress, Type.DRESS).start();
             compatibility(primaryStage, dress);
         });
 
