@@ -199,7 +199,8 @@ public class Retrieve {
     public static HashMap<Integer, HashSet<Integer>> compatibility() {
         HashMap<Integer, HashSet<Integer>> record = new HashMap<>();
         String sql = "SELECT * " +
-                     "FROM Compatibility";
+                     "FROM Compatibility " +
+                     "ORDER BY clothing_id";
 
         try (Connection conn = DriverManager.getConnection(Database.URL);
              Statement statement = conn.createStatement()){
