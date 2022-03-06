@@ -172,6 +172,31 @@ public class Database {
         }
     }
 
+    /**
+     * update the database with closet info that can change
+     * @param closet    a closet of Clothing
+     */
+    public static void updateCloset(Closet closet) {
+        for (Clothing clothing : closet.getAllClothing()) {
+            System.out.println("updating: " + clothing.getName());
+            long last = clothing.getLastUsed() == null ? 0 : clothing.getLastUsed().getEpochSecond();
+
+            String sql = "UPDATE Clothing " +
+                    "SET total_uses = " + clothing.getTotalUses() + ", " +
+                    "uses_since_cleaned = " + clothing.getUsesSinceCleaned() + ", " +
+                    "clean_level = '" + clothing.getCleanLevel() + "', " +
+                    "last_used = " + last +
+                    " WHERE clothing_id == " + clothing.getID();
+
+            try (Connection conn = DriverManager.getConnection(Database.URL);
+                 Statement statement = conn.createStatement()) {
+                statement.executeUpdate(sql);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     public static void main(String[] args) {
         Database.createTables();
     }

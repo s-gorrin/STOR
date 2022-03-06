@@ -67,7 +67,7 @@ public class FXController extends Application {
         Button exit = new Button("exit");
         exit.setOnAction(actionEvent -> {
             compatible.writeToDatabase(closet.getAllIDs());
-            Add.addCloset(closet);
+            Database.updateCloset(closet);
 
             System.exit(0);
         });
